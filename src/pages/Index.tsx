@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const Index = () => {
-  // Ongoing event countdown (set to a future date)
-  const ongoingEventDate = new Date("2024-12-25T10:00:00").getTime();
+  // 🚨 CHANGE THIS DATE FOR HOMEPAGE COUNTDOWN 🚨
+  // Format: "YYYY-MM-DDTHH:MM:SS" (24-hour format)
+  const ongoingEventDate = new Date("2025-01-15T10:00:00").getTime();
   
   const upcomingEvents = [
     {

@@ -7,8 +7,9 @@ import { Trophy, Clock, Star } from "lucide-react";
 const Winners = () => {
   const [showResults, setShowResults] = useState(false);
   
-  // Set countdown target date (you can change this)
-  const countdownDate = new Date("2024-12-31T23:59:59").getTime();
+  // 🚨 CHANGE THIS DATE FOR WINNERS COUNTDOWN 🚨
+  // Format: "YYYY-MM-DDTHH:MM:SS" (24-hour format)
+  const countdownDate = new Date("2025-01-10T18:00:00").getTime();
 
   const winners = [
     {
