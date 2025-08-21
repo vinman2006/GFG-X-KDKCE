@@ -24,7 +24,7 @@ const Navigation = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
 <img
-  src="public/logo/gfg-kdkce.png"
+  src="/gfg-kdkce.png"
   alt="GFG KDKCE Logo"
   className="w-10 h-10 rounded-lg object-contain group-hover:shadow-glow transition-smooth"
 />

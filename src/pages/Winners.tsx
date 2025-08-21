@@ -8,7 +8,7 @@ const Winners = () => {
   const [showResults, setShowResults] = useState(false);
 
   // 🚨 CHANGE THIS DATE FOR COUNTDOWN 🚨
-  const countdownDate = new Date("2025-08-30T18:00:00").getTime();
+  const countdownDate = new Date("2025-08-21T17:00:00").getTime();
 
   // Winners data for different competitions
   const competitions = [

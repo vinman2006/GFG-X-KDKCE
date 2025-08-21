@@ -60,7 +60,7 @@ const HeroSection = () => {
   return (
     <section
       className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
-      style={{ backgroundImage: "url('public/kdkce.jpg')" }} // 👈 make sure this image is in /public
+      style={{ backgroundImage: "url('/kdkce.jpg')" }} // 👈 make sure this image is in /public
     >
       {/* Background 3D Canvas */}
       <div className="absolute inset-0 z-0">
