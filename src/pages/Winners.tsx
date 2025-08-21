@@ -8,24 +8,42 @@ const Winners = () => {
   const [showResults, setShowResults] = useState(false);
 
   // 🚨 CHANGE THIS DATE FOR COUNTDOWN 🚨
-  const countdownDate = new Date("2025-08-21T17:00:00").getTime();
+  const countdownDate = new Date("2025-08-22T12:20:00").getTime();
 
   // Winners data for different competitions
   const competitions = [
     {
-      event: "Coding Championship",
+      event: "Nation SkillUP - Round 2",
       winners: [
         {
           position: "1st Place",
           team: "Team Alpha",
-          members: ["Raj Sharma", "Priya Patel", "Arjun Singh"],
-          prize: "₹10,000",
+          // members: ["Raj Sharma", "Priya Patel", "Arjun Singh"],
+          prize: "GFG Stickers",
         },
         {
           position: "2nd Place",
-          team: "Code Warriors",
-          members: ["Sneha Joshi", "Vikram Kumar"],
-          prize: "₹7,500",
+          team: "The Fab Five",
+          // members: ["Sneha Joshi", "Vikram Kumar"],
+          prize: "GFG Stickers",
+        },
+        {
+          position: "3rd Place",
+          team: "Team Rcc",
+          // members: ["Sneha Joshi", "Vikram Kumar"],
+          prize: "GFG Stickers",
+        },
+        {
+          position: "4th Place",
+          team: "Brain Stormers",
+          // members: ["Sneha Joshi", "Vikram Kumar"],
+          prize: "GFG Stickers",
+        },
+        {
+          position: "5th Place",
+          team: "404 Error",
+          // members: ["Sneha Joshi", "Vikram Kumar"],
+          prize: "GFG Stickers",
         },
       ],
     },
