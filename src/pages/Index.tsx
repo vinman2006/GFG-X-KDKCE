@@ -5,11 +5,14 @@ import HeroSection from "@/components/HeroSection";
 import { Calendar, Clock, Trophy, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+// app/page.tsx or any Next.js page
+import CountdownTimer from "@/components/CountdownTimer.tsx";
 
 const Index = () => {
   // 🚨 CHANGE THIS DATE FOR HOMEPAGE COUNTDOWN 🚨
   // Format: "YYYY-MM-DDTHH:MM:SS" (24-hour format)
-  const ongoingEventDate = new Date("2025-01-15T10:00:00").getTime();
+
+  const ongoingEventDate = new Date("2025-08-21T13:00:00").getTime();
   
   const upcomingEvents = [
     {
@@ -34,23 +37,23 @@ const Index = () => {
 
   const pastEvents = [
     {
-      title: "Coding Championship 2024",
-      date: "October 15, 2024",
-      description: "Our flagship coding competition with 100+ participants",
+      title: "Roadmap for Python & AI/ML",
+      date: "July 17, 2025",
+      description: "Mastering Python and diving into Python & AI/ML - By GFG Mentor",
       status: "Completed"
     },
     {
-      title: "Python Bootcamp",
-      date: "September 20, 2024", 
-      description: "Intensive 3-day Python programming workshop",
+      title: "Path to Placement: A GeekesForGeeks Workshop",
+      date: "February 15, 2025", 
+      description: "To guide students for the placements and interviews",
       status: "Completed"
     },
-    {
-      title: "Open Source Hackathon",
-      date: "August 10, 2024",
-      description: "48-hour hackathon focused on open source contributions",
-      status: "Completed"
-    }
+    // {
+    //   title: "Open Source Hackathon",
+    //   date: "August 10, 2022",
+    //   description: "48-hour hackathon focused on open source contributions",
+    //   status: "Completed"
+    // }
   ];
 
   // Countdown renderer for ongoing event
@@ -85,7 +88,19 @@ const Index = () => {
     <Layout>
       {/* Hero Section */}
       <HeroSection />
+    {/* <main className="flex flex-col items-center justify-center min-h-screen bg-white p-8">
+      <h1 className="text-3xl font-bold text-green-600 mb-6">
+        Countdown to Our Big Event 🎉
+      </h1>
+      <CountdownTimer targetDate="2025-08-25T12:00:00" />
+    </main> */}
+<section className="flex flex-col items-center justify-center min-h-[45vh] bg-gradient-to-b from-white to-green-50 text-center px-4">
+  <h1 className="text-2xl md:text-3xl font-bold text-green-600 mb-4">
+    Countdown to Our Big Event 🎉
+  </h1>
 
+  <CountdownTimer targetDate="2025-08-21T13:00:00" />
+</section>
       <div className="py-20">
         <div className="container mx-auto px-4 lg:px-6">
           {/* Ongoing Event */}
@@ -109,18 +124,23 @@ const Index = () => {
                       <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
                       <span className="text-primary font-semibold">LIVE EVENT</span>
                     </div>
-                    <h3 className="text-2xl font-bold mb-2">Winter Coding Bootcamp</h3>
+                    <h3 className="text-2xl font-bold mb-2">Nation SkillUp - Skill Carnival 2025</h3>
                     <p className="text-muted-foreground mb-4">
-                      Intensive 5-day coding bootcamp covering full-stack development
+                      A Nation SkillUP Initiative to enhance skills and knowledge
+                      through hands-on workshops and competitions.
                     </p>
                     <div className="flex items-center justify-center lg:justify-start space-x-4 text-sm text-muted-foreground">
                       <div className="flex items-center space-x-1">
                         <Calendar className="w-4 h-4" />
-                        <span>Dec 25, 2024</span>
+                        <span>August 21, 2025</span>
                       </div>
                       <div className="flex items-center space-x-1">
                         <Users className="w-4 h-4" />
-                        <span>50+ Participants</span>
+                        <span>200+ Participants</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Users className="w-4 h-4" />
+                        <span>Venue : Auditorium KDKCE</span>
                       </div>
                     </div>
                   </div>

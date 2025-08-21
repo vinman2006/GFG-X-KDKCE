@@ -4,45 +4,45 @@ import { Mail, MapPin, Phone, Instagram, Linkedin, Clock } from "lucide-react";
 
 const Contact = () => {
   const contactInfo = [
-    {
-      icon: Mail,
-      title: "Email",
-      details: "gfg@kdkce.edu.in",
-      link: "mailto:gfg@kdkce.edu.in"
-    },
-    {
-      icon: Phone,
-      title: "Phone",
-      details: "+91 98765 43210",
-      link: "tel:+919876543210"
-    },
+    // {
+    //   icon: Mail,
+    //   title: "Email",
+    //   details: "gfg@kdkce.edu.in",
+    //   link: "mailto:gfg@kdkce.edu.in"
+    // },
+    // {
+    //   icon: Phone,
+    //   title: "Phone",
+    //   details: "+91 98765 43210",
+    //   link: "tel:+919876543210"
+    // },
     {
       icon: MapPin,
       title: "Location",
       details: "KDK College of Engineering, Nagpur, Maharashtra",
       link: "#"
     },
-    {
-      icon: Clock,
-      title: "Office Hours",
-      details: "Mon - Fri: 9:00 AM - 5:00 PM",
-      link: "#"
-    }
+    // {
+    //   icon: Clock,
+    //   title: "Office Hours",
+    //   details: "Mon - Fri: 9:00 AM - 5:00 PM",
+    //   link: "#"
+    // }
   ];
 
   const socialLinks = [
     {
       icon: Instagram,
       name: "Instagram",
-      handle: "@gfg_kdkce",
-      link: "https://instagram.com/gfg_kdkce",
+      handle: "@geeksforgeeks_kdkce",
+      link: "https://www.instagram.com/geeksforgeeks_kdkce?igsh=a241bGJ3anM3ZXhr",
       color: "hover:bg-pink-500"
     },
     {
       icon: Linkedin,
       name: "LinkedIn",
-      handle: "GFG KDKCE",
-      link: "https://linkedin.com/company/gfg-kdkce",
+      handle: "Geeks For Geeks KDKCE",
+      link: "https://www.linkedin.com/company/geeks-for-geeks-kdkce/",
       color: "hover:bg-blue-600"
     }
   ];
@@ -184,7 +184,7 @@ const Contact = () => {
               </p>
               <div className="inline-flex items-center space-x-2 text-primary">
                 <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                <span className="font-medium">Admissions Open</span>
+                <span className="font-medium">Coming Soon..</span>
               </div>
             </div>
           </motion.div>

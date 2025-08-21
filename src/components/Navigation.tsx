@@ -23,11 +23,13 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
-            <div className="p-2 bg-primary rounded-lg group-hover:shadow-glow transition-smooth">
-              <Code2 className="w-6 h-6 text-primary-foreground" />
-            </div>
+<img
+  src="public/logo/gfg-kdkce.png"
+  alt="GFG KDKCE Logo"
+  className="w-10 h-10 rounded-lg object-contain group-hover:shadow-glow transition-smooth"
+/>
             <div className="hidden sm:block">
-              <span className="text-xl font-bold text-gradient">GFG</span>
+              <span className="text-xl font-bold text-gradient">GeeksForGeeks</span>
               <span className="text-sm text-muted-foreground ml-1">KDKCE</span>
             </div>
           </Link>
