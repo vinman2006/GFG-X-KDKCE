@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Text3D, Center, Float } from "@react-three/drei";
+import { OrbitControls, Float } from "@react-three/drei";
 import { motion } from "framer-motion";
 import * as THREE from "three";
 
@@ -16,20 +16,13 @@ const FloatingCube = ({ position, color }: { position: [number, number, number];
   );
 };
 
-const CodeSnippet = ({ position }: { position: [number, number, number] }) => {
+const CodeSymbol = ({ position }: { position: [number, number, number] }) => {
   return (
     <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.3}>
-      <Center position={position}>
-        <Text3D
-          font="/fonts/Inter_Bold.json"
-          size={0.3}
-          height={0.05}
-          curveSegments={32}
-        >
-          {"</>"}
-          <meshStandardMaterial color="#2F8D46" />
-        </Text3D>
-      </Center>
+      <mesh position={position}>
+        <torusGeometry args={[0.3, 0.1, 16, 100]} />
+        <meshStandardMaterial color="#2F8D46" />
+      </mesh>
     </Float>
   );
 };
@@ -46,8 +39,8 @@ const Scene = () => {
       <FloatingCube position={[3, -1, -1]} color="#4CAF50" />
       <FloatingCube position={[-2, -2, -3]} color="#66BB6A" />
       
-      <CodeSnippet position={[2, 2, 0]} />
-      <CodeSnippet position={[-1, -1, 1]} />
+      <CodeSymbol position={[2, 2, 0]} />
+      <CodeSymbol position={[-1, -1, 1]} />
       
       <OrbitControls enableZoom={false} enablePan={false} />
     </>
