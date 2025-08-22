@@ -91,7 +91,7 @@ const TeamPage = () => {
         <br/>
         <br/>
         <br/>
-        <h3 className="text-2xl font-semibold mb-8 text-black-600">More Members Coming Soon..</h3>
+        <h6 className="text-2xl font-semibold mb-8 text-black-600">More Members Coming Soon..</h6>
 
       </div>
     </section>

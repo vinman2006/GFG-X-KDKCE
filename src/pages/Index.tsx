@@ -62,7 +62,7 @@ const Index = () => {
       return (
         <div className="text-center">
           <p className="text-2xl font-bold text-primary">Event Started!</p>
-          <p className="text-muted-foreground">Join us live now</p>
+          <p className="text-muted-foreground">Join us for Prize Distribution</p>
         </div>
       );
     }
