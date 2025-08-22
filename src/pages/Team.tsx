@@ -13,8 +13,12 @@ const teamMembers = [
 ];
 
 const facultyAdvisors = [
-  { name: "Dr. A. A. Jaiswal", role: "HOD, CSE Dept", image: "/team/faculty1.jpg" },
-  { name: "Dr. A. M. Kuthe", role: "Faculty Advisor, CSE Dept", image: "/team/faculty2.jpg" },
+  { name: "Dr. V. P. Varghese", role: "Principal, KDKCE", image: "/principal.jpg" },
+  { name: "Dr. A. M. Badar", role: "Vice-Principal, KDKCE", image: "/v-principal.png" },
+
+  { name: "Dr. A. A. Jaiswal", role: "HOD, CSE Dept", image: "/hod.jpg" },
+  { name: "Prof. A. M. Kuthe", role: "Faculty Advisor, CSE Dept", image: "/advisor-f.jpg" },
+
 ];
 
 const TeamPage = () => {

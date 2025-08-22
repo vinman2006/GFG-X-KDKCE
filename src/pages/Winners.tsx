@@ -8,7 +8,7 @@ const Winners = () => {
   const [showResults, setShowResults] = useState(false);
 
   // Countdown date for final winners
-  const countdownDate = new Date("2025-08-22T12:15:00").getTime();
+  const countdownDate = new Date("2025-08-22T13:15:00").getTime();
 
   // Past winners: Rounds 1 & 2
   const competitions = [
@@ -19,7 +19,8 @@ const Winners = () => {
         { position: "2nd Place", team: "The Fab Five" },
         { position: "3rd Place", team: "Team RCC" },
         { position: "4th Place", team: "Brain Stormers" },
-        { position: "5th Place", team: "404 Error" },
+        { position: "5th Place", team: "The Fab" },
+        { position: "6th Place", team: "404 Error" },
       ],
     },
     // {
