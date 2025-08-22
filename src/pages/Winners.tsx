@@ -8,7 +8,7 @@ const Winners = () => {
   const [showResults, setShowResults] = useState(false);
 
   // Countdown date for final winners
-  const countdownDate = new Date("2025-08-22T15:00:00").getTime();
+  const countdownDate = new Date("2025-08-22T15:30:00").getTime();
 
   // Past winners: Rounds 1 & 2
   const competitions = [
