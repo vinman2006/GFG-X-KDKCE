@@ -7,7 +7,7 @@ const teamMembers = [
   { name: "Rasika Pande", role: "Technical Head", image: "/image.png" },
   { name: "Khushi Bodakhe", role: "Event Head", image: "/ks.jpg" },
   { name: "Sakshi Wagh", role: "Design & Creative Head", image: "/sk.png" },
-  { name: "Anisha Gurumukhi", role: "PR & Outreach Head", image: "/an2.png" },
+  { name: "Anisha Gurumukhi", role: "PR & Outreach Head", image: "/ag.jpg" },
   { name: "Harshit Pachbudhe", role: "Marketing Head", image: "/hs.jpg" },
   { name: "Himanshu Kamble", role: "Social Media Head", image: "/hm.png" },
 ];
@@ -40,7 +40,7 @@ const TeamPage = () => {
 
         {/* Faculty Advisors */}
         <div className="mb-16">
-          <h3 className="text-2xl font-semibold mb-8 text-green-600">Faculty Advisors</h3>
+          <h3 className="text-2xl font-semibold mb-8 text-green-600">The Driving Force Behind Our Success - Our Advisory Faculty</h3>
           <div className="flex justify-center gap-10 flex-wrap">
             {facultyAdvisors.map((fa, idx) => (
               <div
@@ -88,6 +88,11 @@ const TeamPage = () => {
             </motion.div>
           ))}
         </div>
+        <br/>
+        <br/>
+        <br/>
+        <h3 className="text-2xl font-semibold mb-8 text-black-600">More Members Coming Soon..</h3>
+
       </div>
     </section>
       </Layout>

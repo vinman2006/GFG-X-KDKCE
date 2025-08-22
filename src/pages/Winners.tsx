@@ -8,12 +8,12 @@ const Winners = () => {
   const [showResults, setShowResults] = useState(false);
 
   // Countdown date for final winners
-  const countdownDate = new Date("2025-08-22T13:15:00").getTime();
+  const countdownDate = new Date("2025-08-22T14:30:00").getTime();
 
   // Past winners: Rounds 1 & 2
   const competitions = [
    {
-      event: "Nation SkillUP - Round 2",
+      event: "NationSkillUP - Round 2",
       winners: [
         { position: "1st Place", team: "Team Alpha" },
         { position: "2nd Place", team: "The Fab Five" },
@@ -35,19 +35,19 @@ const Winners = () => {
   // Final rounds winners (shown after countdown)
   const finalRounds = [
     {
-      event: "Nation SkillUP - Final Round",
+      event: "NationSkillUP - Final Round",
       winners: [
-        { position: "1st Place", team: "Coming soon.." },
-        { position: "2nd Place", team: "Coming soon.." },
-        { position: "3rd Place", team: "Coming soon.." },
+        { position: "1st Place", team: "Amartya Choubey" },
+        { position: "2nd Place", team: "Krish Ganvir" },
+        { position: "3rd Place", team: "Atharva Gaddalwar" },
+        { position: "4th Place", team: "Hasnain Sheikh" },
+        { position: "5th Place", team: "Paras Moharle" },
       ],
     },
     {
-      event: "Nation SkillUP - Social Media Activity",
+      event: "NationSkillUP - Social Media Activity",
       winners: [
-        { position: "1st Place", team: "Coming soon.." },
-        { position: "2nd Place", team: "Coming soon.." },
-      ],
+        { position: "1st Place", team: "Harshit Sharma" }      ],
     },
   ];
 
