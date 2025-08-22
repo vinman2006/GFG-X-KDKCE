@@ -43,7 +43,7 @@ const Index = () => {
       status: "Completed"
     },
     {
-      title: "Path to Placement: A GeekesForGeeks Workshop",
+      title: "Path to Placement: A GeeksForGeeks Workshop",
       date: "February 15, 2025", 
       description: "To guide students for the placements and interviews",
       status: "Completed"
@@ -159,6 +159,14 @@ const Index = () => {
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="text-center mt-8">
+              <Link to="/winners">
+                <Button size="lg" className="group">
+                  View Winners
+                  <Trophy className="w-4 h-4 ml-2 group-hover:scale-110 transition-smooth" />
+                </Button>
+              </Link>
             </div>
           </motion.section>
 
