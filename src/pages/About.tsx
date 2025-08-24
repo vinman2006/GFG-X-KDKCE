@@ -38,7 +38,7 @@ const About = () => {
             className="text-center mb-16"
           >
             <h1 className="text-5xl md:text-6xl font-bold text-gradient mb-6">
-              About GFG KDKCE
+              About GeeksForGeeks KDKCE
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               We are the official GeeksforGeeks Student Chapter at KDK College of Engineering, 

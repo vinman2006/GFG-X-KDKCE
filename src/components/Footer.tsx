@@ -15,8 +15,8 @@ const Footer = () => {
       className="w-10 h-10 rounded-lg object-contain"
     />
     <div>
-      <span className="text-xl font-bold text-gradient">GFG KDKCE</span>
-      <p className="text-sm text-muted-foreground">GeeksforGeeks Student Chapter</p>
+      <span className="text-xl font-bold text-gradient">GeeksForGeeks KDKCE</span>
+      <p className="text-sm text-muted-foreground">GeeksForGeeks Student Chapter</p>
     </div>
   </div>
   <p className="text-sm text-muted-foreground">
@@ -77,7 +77,7 @@ const Footer = () => {
         <div className="mt-8 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground">
-              © 2025 GFG KDKCE. All rights reserved.
+              © 2025 GeeksForGeeks KDKCE. All rights reserved.
             </p>
             <p className="text-sm text-muted-foreground">
               KDK College of Engineering, Nagpur

@@ -61,8 +61,8 @@ const Index = () => {
     if (completed) {
       return (
         <div className="text-center">
-          <p className="text-2xl font-bold text-primary">Event Started!</p>
-          <p className="text-muted-foreground">Join us for Prize Distribution</p>
+          <p className="text-2xl font-bold text-primary">Event Ended!</p>
+          <p className="text-muted-foreground">View the Winners</p>
         </div>
       );
     }
@@ -112,8 +112,8 @@ const Index = () => {
             className="mb-20"
           >
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gradient mb-4">Ongoing Event</h2>
-              <p className="text-lg text-muted-foreground">Don't miss out on our current event</p>
+              <h2 className="text-4xl font-bold text-gradient mb-4">Recent Event</h2>
+              <p className="text-lg text-muted-foreground">Don't miss out the insights on our recent event</p>
             </div>
             
             <div className="max-w-4xl mx-auto">
@@ -122,7 +122,7 @@ const Index = () => {
                   <div className="flex-1 text-center lg:text-left">
                     <div className="flex items-center justify-center lg:justify-start space-x-2 mb-4">
                       <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
-                      <span className="text-primary font-semibold">LIVE EVENT</span>
+                      <span className="text-primary font-semibold">EVENT ENDED</span>
                     </div>
                     <h3 className="text-2xl font-bold mb-2">Nation SkillUp - Skill Carnival 2025</h3>
                     <p className="text-muted-foreground mb-4">
@@ -132,7 +132,7 @@ const Index = () => {
                     <div className="flex items-center justify-center lg:justify-start space-x-4 text-sm text-muted-foreground">
                       <div className="flex items-center space-x-1">
                         <Calendar className="w-4 h-4" />
-                        <span>August 21, 2025</span>
+                        <span>August 21-22, 2025</span>
                       </div>
                       <div className="flex items-center space-x-1">
                         <Users className="w-4 h-4" />
