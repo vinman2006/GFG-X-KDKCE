@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import VisitorCounter from "./VisitorCounter";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
 
@@ -13,6 +14,7 @@ const Layout = ({ children }: LayoutProps) => {
       <main className="flex-1 pt-16">
         {children}
       </main>
+      
       <Footer />
     </div>
   );

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import VisitorCounter from "./VisitorCounter";
 import { Code2, Instagram, Linkedin, Mail } from "lucide-react";
 
 const Footer = () => {
@@ -75,17 +76,20 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 pt-8 border-t border-border">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
             <p className="text-sm text-muted-foreground">
               © 2025 GeeksForGeeks KDKCE. All rights reserved.
             </p>
             <p className="text-sm text-muted-foreground">
               KDK College of Engineering, Nagpur
             </p>
-          </div>
+            <VisitorCounter />
+            
+            </div>
         </div>
-      </div>
-    </footer>
+      </div>        
+
+      </footer>
   );
 };
 
