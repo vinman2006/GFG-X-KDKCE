@@ -5,7 +5,7 @@ const VisitorCounter = () => {
 
   useEffect(() => {
     const hostname = window.location.hostname; // auto-detect domain
-    const url = `https://api.countapi.xyz/hit/${hostname}/visitors`;
+    const url = `https://api.countapi.xyz/hit/geeksforgeeks-kdkce/visitors`;
 
     fetch(url)
       .then((res) => res.json())
