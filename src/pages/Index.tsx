@@ -1,276 +1,194 @@
 import { motion } from "framer-motion";
-import Countdown from "react-countdown";
 import Layout from "@/components/Layout";
 import HeroSection from "@/components/HeroSection";
-import { Calendar, Clock, Trophy, Users, ArrowRight } from "lucide-react";
+import { Terminal, Laptop, Lightbulb, ArrowRight, Github, Linkedin, Calendar, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-// app/page.tsx or any Next.js page
-import CountdownTimer from "@/components/CountdownTimer.tsx";
 
 const Index = () => {
-  // 🚨 CHANGE THIS DATE FOR HOMEPAGE COUNTDOWN 🚨
-  // Format: "YYYY-MM-DDTHH:MM:SS" (24-hour format)
-
-  const ongoingEventDate = new Date("2025-08-21T13:00:00").getTime();
-  
-  const upcomingEvents = [
+  const whatWeDo = [
     {
-      title: "Web Development Workshop",
-      date: "Coming Soon",
-      description: "Learn modern web development with React and Node.js",
-      participants: "Open to All"
+      title: "Competitive Programming",
+      description: "Master algorithms, data structures, and problem-solving techniques to ace coding interviews and competitions.",
+      icon: <Terminal className="w-8 h-8 text-[#0F9D58]" />
     },
     {
-      title: "Competitive Programming Contest",
-      date: "Coming Soon", 
-      description: "Test your coding skills in this exciting programming challenge",
-      participants: "Students Only"
+      title: "Development & Open Source",
+      description: "Build real-world projects, contribute to open source, and learn modern frameworks and technologies.",
+      icon: <Laptop className="w-8 h-8 text-[#0F9D58]" />
     },
     {
-      title: "Tech Talk Series",
-      date: "Coming Soon",
-      description: "Industry experts share insights on latest technology trends",
-      participants: "Open to All"
+      title: "Workshops & Hackathons",
+      description: "Participate in intense coding sessions, hands-on workshops, and collaborative hackathons.",
+      icon: <Lightbulb className="w-8 h-8 text-[#0F9D58]" />
     }
   ];
 
-  const pastEvents = [
+  const events = [
     {
-      title: "Roadmap for Python & AI/ML",
-      date: "July 17, 2025",
-      description: "Mastering Python and diving into Python & AI/ML - By GFG Mentor",
-      status: "Completed"
+      title: "Web Development Bootcamp",
+      date: "Oct 15, 2025",
+      type: "Workshop",
+      image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop",
+      description: "A comprehensive 3-day bootcamp covering React, Node.js, and modern web architecture."
     },
     {
-      title: "Path to Placement: A GeeksForGeeks Workshop",
-      date: "February 15, 2025", 
-      description: "To guide students for the placements and interviews",
-      status: "Completed"
+      title: "Algo Coding Contest",
+      date: "Nov 02, 2025",
+      type: "Competition",
+      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop",
+      description: "Test your algorithmic problem-solving skills against the best coders in the college."
     },
-    // {
-    //   title: "Open Source Hackathon",
-    //   date: "August 10, 2022",
-    //   description: "48-hour hackathon focused on open source contributions",
-    //   status: "Completed"
-    // }
+    {
+      title: "Open Source Summit",
+      date: "Dec 10, 2025",
+      type: "Seminar",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop",
+      description: "Learn how to make your first open-source contribution and collaborate on GitHub."
+    }
   ];
 
-  // Countdown renderer for ongoing event
-  const OngoingCountdownRenderer = ({ days, hours, minutes, seconds, completed }: any) => {
-    if (completed) {
-      return (
-        <div className="text-center">
-          <p className="text-2xl font-bold text-primary">Event Ended!</p>
-          <p className="text-muted-foreground">View the Winners</p>
-        </div>
-      );
+  const teamMembers = [
+    {
+      name: "Alex Johnson",
+      role: "President",
+      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=150&auto=format&fit=crop"
+    },
+    {
+      name: "Sarah Chen",
+      role: "Vice President",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop"
+    },
+    {
+      name: "Michael Gupta",
+      role: "Technical Lead",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop"
+    },
+    {
+      name: "Priya Sharma",
+      role: "Events Head",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop"
     }
-
-    return (
-      <div className="grid grid-cols-4 gap-2 text-center">
-        {[
-          { label: "Days", value: days },
-          { label: "Hrs", value: hours },
-          { label: "Min", value: minutes },
-          { label: "Sec", value: seconds }
-        ].map((item) => (
-          <div key={item.label} className="bg-background/50 rounded-lg p-2">
-            <div className="text-lg font-bold text-primary">{item.value}</div>
-            <div className="text-xs text-muted-foreground">{item.label}</div>
-          </div>
-        ))}
-      </div>
-    );
-  };
+  ];
 
   return (
     <Layout>
       {/* Hero Section */}
       <HeroSection />
-    {/* <main className="flex flex-col items-center justify-center min-h-screen bg-white p-8">
-      <h1 className="text-3xl font-bold text-green-600 mb-6">
-        Countdown to Our Big Event 🎉
-      </h1>
-      <CountdownTimer targetDate="2025-08-25T12:00:00" />
-    </main> */}
-<section className="flex flex-col items-center justify-center min-h-[45vh] bg-gradient-to-b from-white to-green-50 text-center px-4">
-  <h1 className="text-2xl md:text-3xl font-bold text-green-600 mb-4">
-    Countdown to Our Big Event 🎉
-  </h1>
 
-  <CountdownTimer targetDate="2025-08-21T13:00:00" />
-</section>
-      <div className="py-20">
+      {/* 🔹 Section 1 - What We Do */}
+      <section className="py-[100px] bg-white">
         <div className="container mx-auto px-4 lg:px-6">
-          {/* Ongoing Event */}
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="mb-20"
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gradient mb-4">Recent Event</h2>
-              <p className="text-lg text-muted-foreground">Don't miss out the insights on our recent event</p>
-            </div>
-            
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-gradient-to-r from-primary/10 to-primary-glow/10 rounded-2xl p-8 border border-primary/20 shadow-card">
-                <div className="flex flex-col lg:flex-row items-center justify-between space-y-6 lg:space-y-0">
-                  <div className="flex-1 text-center lg:text-left">
-                    <div className="flex items-center justify-center lg:justify-start space-x-2 mb-4">
-                      <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
-                      <span className="text-primary font-semibold">EVENT ENDED</span>
-                    </div>
-                    <h3 className="text-2xl font-bold mb-2">Nation SkillUp - Skill Carnival 2025</h3>
-                    <p className="text-muted-foreground mb-4">
-                      A Nation SkillUP Initiative to enhance skills and knowledge
-                      through hands-on workshops and competitions.
-                    </p>
-                    <div className="flex items-center justify-center lg:justify-start space-x-4 text-sm text-muted-foreground">
-                      <div className="flex items-center space-x-1">
-                        <Calendar className="w-4 h-4" />
-                        <span>August 21-22, 2025</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Users className="w-4 h-4" />
-                        <span>200+ Participants</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Users className="w-4 h-4" />
-                        <span>Venue : Auditorium KDKCE</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="flex-shrink-0">
-                    <div className="bg-card rounded-xl p-6 shadow-card">
-                      <div className="flex items-center space-x-2 mb-4">
-                        <Clock className="w-5 h-5 text-primary" />
-                        <span className="font-semibold">Time Remaining</span>
-                      </div>
-                      <Countdown
-                        date={ongoingEventDate}
-                        renderer={OngoingCountdownRenderer}
-                      />
-                    </div>
-                  </div>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">What We Do</h2>
+            <p className="text-gray-600 font-sans text-lg">
+              Empowering students with practical tech skills, professional networking, and real-world project experience.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {whatWeDo.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white p-8 rounded-xl border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:scale-[1.03] transition-all duration-300"
+              >
+                <div className="w-16 h-16 bg-[#0F9D58]/10 rounded-lg flex items-center justify-center mb-6">
+                  {item.icon}
                 </div>
-              </div>
-            </div>
-            <div className="text-center mt-8">
-              <Link to="/winners">
-                <Button size="lg" className="group">
-                  View Winners
-                  <Trophy className="w-4 h-4 ml-2 group-hover:scale-110 transition-smooth" />
-                </Button>
-              </Link>
-            </div>
-          </motion.section>
-
-          {/* Upcoming Events */}
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="mb-20"
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4">Upcoming Events</h2>
-              <p className="text-lg text-muted-foreground">Exciting events lined up for the future</p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {upcomingEvents.map((event, index) => (
-                <motion.div
-                  key={event.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
-                  viewport={{ once: true }}
-                  className="bg-card rounded-xl p-6 shadow-card border border-border hover:shadow-float transition-smooth"
-                >
-                  <div className="flex items-center space-x-2 mb-4">
-                    <div className="w-2 h-2 bg-primary-glow rounded-full" />
-                    <span className="text-primary-glow font-medium text-sm">COMING SOON</span>
-                  </div>
-                  <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
-                  <p className="text-muted-foreground mb-4">{event.description}</p>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center space-x-2">
-                      <Calendar className="w-4 h-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">{event.date}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Users className="w-4 h-4 text-muted-foreground" />
-                      <span className="text-muted-foreground">{event.participants}</span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.section>
-
-          {/* Past Events */}
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="mb-20"
-          >
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4">Past Events</h2>
-              <p className="text-lg text-muted-foreground">Celebrating our successful events and achievements</p>
-            </div>
-            
-            <div className="space-y-4">
-              {pastEvents.map((event, index) => (
-                <motion.div
-                  key={event.title}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
-                  viewport={{ once: true }}
-                  className="bg-card rounded-xl p-6 shadow-card border border-border hover:shadow-float transition-smooth"
-                >
-                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <Trophy className="w-5 h-5 text-primary" />
-                        <span className="text-primary font-medium text-sm">{event.status}</span>
-                      </div>
-                      <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
-                      <p className="text-muted-foreground">{event.description}</p>
-                    </div>
-                    <div className="flex items-center space-x-4">
-                      <div className="text-right">
-                        <p className="text-sm text-muted-foreground">{event.date}</p>
-                      </div>
-                      <Button variant="outline" size="sm" className="group">
-                        View Details
-                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-smooth" />
-                      </Button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            
-            <div className="text-center mt-8">
-              <Link to="/winners">
-                <Button size="lg" className="group">
-                  View All Winners
-                  <Trophy className="w-4 h-4 ml-2 group-hover:scale-110 transition-smooth" />
-                </Button>
-              </Link>
-            </div>
-          </motion.section>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* 🔹 Section 3 - Events Showcase */}
+      <section className="py-[100px] bg-[#F9FAFB]" id="events">
+        <div className="container mx-auto px-4 lg:px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div className="max-w-xl">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">Upcoming Events</h2>
+              <p className="text-gray-600 font-sans text-lg">
+                Join our workshops, hackathons, and technical sessions designed to accelerate your growth.
+              </p>
+            </div>
+            <a href="#" className="hidden md:flex items-center text-[#0F9D58] font-semibold hover:underline">
+              View all events <ArrowRight className="w-4 h-4 ml-2" />
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {events.map((event, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 group"
+              >
+                <div className="h-48 overflow-hidden relative">
+                  <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-sm px-3 py-1 rounded text-sm font-semibold text-gray-900">
+                    {event.type}
+                  </div>
+                  <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center text-sm text-gray-500 mb-3">
+                    <Calendar className="w-4 h-4 mr-2" />
+                    {event.date}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#0F9D58] transition-colors">{event.title}</h3>
+                  <p className="text-gray-600 mb-4 line-clamp-2">{event.description}</p>
+                  <a href="#" className="inline-flex items-center font-semibold text-[#0F9D58] hover:text-[#0c8a4d]">
+                    Learn More <ArrowRight className="w-4 h-4 ml-1" />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 Section 4 - Team */}
+      <section className="py-[100px] bg-white">
+        <div className="container mx-auto px-4 lg:px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">Meet The Team</h2>
+            <p className="text-gray-600 font-sans text-lg">
+              The passionate individuals driving the GeeksforGeeks chapter at KDKCE.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {teamMembers.map((member, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center text-center group"
+              >
+                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-4 border-4 border-gray-50">
+                  <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900">{member.name}</h3>
+                <p className="text-[#0F9D58] font-medium text-sm mb-3">{member.role}</p>
+                <a href="#" className="text-gray-400 hover:text-[#0a66c2] transition-colors">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 };
