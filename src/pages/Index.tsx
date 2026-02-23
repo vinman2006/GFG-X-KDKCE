@@ -1,196 +1,463 @@
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef, memo } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Layout from "@/components/Layout";
 import HeroSection from "@/components/HeroSection";
-import { Terminal, Laptop, Lightbulb, ArrowRight, Github, Linkedin, Calendar, MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Terminal, TrendingUp, TrendingDown, GitCommit, GitPullRequest, CheckCircle2, ChevronRight, Trophy, Github, Linkedin, Mail, Instagram, Globe } from "lucide-react";
 
 const Index = () => {
-  const whatWeDo = [
-    {
-      title: "Competitive Programming",
-      description: "Master algorithms, data structures, and problem-solving techniques to ace coding interviews and competitions.",
-      icon: <Terminal className="w-8 h-8 text-[#0F9D58]" />
-    },
-    {
-      title: "Development & Open Source",
-      description: "Build real-world projects, contribute to open source, and learn modern frameworks and technologies.",
-      icon: <Laptop className="w-8 h-8 text-[#0F9D58]" />
-    },
-    {
-      title: "Workshops & Hackathons",
-      description: "Participate in intense coding sessions, hands-on workshops, and collaborative hackathons.",
-      icon: <Lightbulb className="w-8 h-8 text-[#0F9D58]" />
-    }
+  // 1. Leaderboard State
+  const [leaderboard, setLeaderboard] = useState([
+    { id: 1, name: "vineet_m", score: 2840, tag: "DSA", trend: "up" },
+    { id: 2, name: "sarah_c", score: 2790, tag: "CP", trend: "up" },
+    { id: 3, name: "alex_j", score: 2755, tag: "Hackathon", trend: "up" },
+  ]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLeaderboard(prev => {
+        let newBoard = prev.map(p => ({
+          ...p,
+          score: p.score + Math.floor(Math.random() * 25),
+          trend: Math.random() > 0.3 ? "up" : "down"
+        }));
+        newBoard.sort((a, b) => b.score - a.score);
+        return newBoard.slice(0, 3);
+      });
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // 3. Terminal State
+  const terminalStats = [
+    { type: "push", text: "> Pushed feature: Dynamic Leaderboard", icon: <GitCommit className="w-4 h-4 text-[#0F9D58]" /> },
+    { type: "fix", text: "> Fixed bug in Three.js rendering", icon: <Terminal className="w-4 h-4 text-[#B6F000]" /> },
+    { type: "merge", text: "> Merged PR #42", icon: <GitPullRequest className="w-4 h-4 text-[#E6EDF3]" /> },
+    { type: "deploy", text: "> Deployed production build", icon: <CheckCircle2 className="w-4 h-4 text-[#0F9D58]" /> }
   ];
 
-  const events = [
-    {
-      title: "Web Development Bootcamp",
-      date: "Oct 15, 2025",
-      type: "Workshop",
-      image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=600&auto=format&fit=crop",
-      description: "A comprehensive 3-day bootcamp covering React, Node.js, and modern web architecture."
-    },
-    {
-      title: "Algo Coding Contest",
-      date: "Nov 02, 2025",
-      type: "Competition",
-      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop",
-      description: "Test your algorithmic problem-solving skills against the best coders in the college."
-    },
-    {
-      title: "Open Source Summit",
-      date: "Dec 10, 2025",
-      type: "Seminar",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop",
-      description: "Learn how to make your first open-source contribution and collaborate on GitHub."
-    }
-  ];
+  const [visibleTerminalLines, setVisibleTerminalLines] = useState<{ id: number; lineIdx: number }[]>([]);
 
-  const teamMembers = [
-    {
-      name: "Alex Johnson",
-      role: "President",
-      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=150&auto=format&fit=crop"
-    },
-    {
-      name: "Sarah Chen",
-      role: "Vice President",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop"
-    },
-    {
-      name: "Michael Gupta",
-      role: "Technical Lead",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop"
-    },
-    {
-      name: "Priya Sharma",
-      role: "Events Head",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop"
-    }
-  ];
+  useEffect(() => {
+    let step = 0;
+    let idCounter = 0;
+    const interval = setInterval(() => {
+      setVisibleTerminalLines(prev => {
+        // Only keep last 50 items to avoid DOM explosion entirely, but don't limit to 4 to allow scrolling
+        const next = [...prev, { id: idCounter++, lineIdx: step }];
+        if (next.length > 50) next.shift();
+        return next;
+      });
+      step = (step + 1) % terminalStats.length;
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Layout>
-      {/* Hero Section */}
       <HeroSection />
 
-      {/* 🔹 Section 1 - What We Do */}
-      <section className="py-[100px] bg-white">
-        <div className="container mx-auto px-4 lg:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">What We Do</h2>
-            <p className="text-gray-600 font-sans text-lg">
-              Empowering students with practical tech skills, professional networking, and real-world project experience.
+      {/* 🔹 Interactive Modules Section */}
+      <section className="py-24 bg-[#0E1117] relative overflow-hidden border-t border-white/5">
+
+        {/* Subtle grid background */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_20%,transparent_100%)] pointer-events-none" />
+
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="mb-16">
+            <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-[#E6EDF3] mb-4">
+              Computational <span className="text-[#0F9D58] font-mono italic font-normal tracking-tight">Modules</span>
+            </h2>
+            <p className="text-[#8B949E] font-mono text-sm max-w-xl border-l-2 border-[#B6F000] pl-4">
+              System architecture designed to output 10x engineering potential.
+              <br />Status: Online.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {whatWeDo.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white p-8 rounded-xl border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:scale-[1.03] transition-all duration-300"
-              >
-                <div className="w-16 h-16 bg-[#0F9D58]/10 rounded-lg flex items-center justify-center mb-6">
-                  {item.icon}
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {item.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <div className="flex flex-col lg:grid lg:grid-cols-3 gap-8 lg:h-[80vh] lg:max-h-[900px] lg:overflow-hidden">
 
-      {/* 🔹 Section 3 - Events Showcase */}
-      <section className="py-[100px] bg-[#F9FAFB]" id="events">
-        <div className="container mx-auto px-4 lg:px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-            <div className="max-w-xl">
-              <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">Upcoming Events</h2>
-              <p className="text-gray-600 font-sans text-lg">
-                Join our workshops, hackathons, and technical sessions designed to accelerate your growth.
-              </p>
+            {/* Module 1: Competitive Arena */}
+            <div className="h-[60vh] lg:h-full bg-[#161B22]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col group hover:border-[#0F9D58]/50 transition-colors duration-500">
+              <div className="h-[60px] shrink-0 flex items-center justify-between border-b border-white/5 mb-4">
+                <h3 className="text-lg font-heading font-bold text-[#E6EDF3] flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#0F9D58] animate-pulse" />
+                  Live Arena
+                </h3>
+                <span className="text-xs font-mono text-[#8B949E] bg-[#0E1117] px-2 py-1 rounded">Rankings</span>
+              </div>
+
+              <div className="flex-1 overflow-y-auto pr-1.5 custom-scrollbar overscroll-contain">
+                <div className="space-y-3 relative pb-4">
+                  <AnimatePresence mode="popLayout">
+                    {leaderboard.map((user, idx) => (
+                      <motion.div
+                        layout
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        key={user.name}
+                        className="bg-[#0E1117] rounded-xl p-4 flex items-center justify-between border border-white/5 relative overflow-hidden"
+                      >
+                        {/* Rank Indicator */}
+                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#0F9D58] to-[#B6F000] opacity-50" />
+
+                        <div className="flex items-center gap-3">
+                          <span className="text-[#8B949E] font-mono text-sm w-4">0{idx + 1}</span>
+                          <div>
+                            <p className="text-[#E6EDF3] font-mono font-bold text-sm">{user.name}</p>
+                            <span className="text-[10px] text-[#B6F000] border border-[#B6F000]/30 px-1.5 py-0.5 rounded backdrop-blur-sm uppercase">{user.tag}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="font-mono text-[#E6EDF3] font-bold">{user.score}</span>
+                          {user.trend === "up" ? (
+                            <TrendingUp className="w-4 h-4 text-[#0F9D58] animate-bounce" />
+                          ) : (
+                            <TrendingDown className="w-4 h-4 text-red-400" />
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </AnimatePresence>
+                </div>
+              </div>
             </div>
-            <a href="#" className="hidden md:flex items-center text-[#0F9D58] font-semibold hover:underline">
-              View all events <ArrowRight className="w-4 h-4 ml-2" />
-            </a>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {events.map((event, index) => (
+            {/* Module 2: Workshop Engine */}
+            <div className="h-[60vh] lg:h-full bg-[#161B22]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col relative overflow-hidden group hover:border-[#B6F000]/50 transition-colors duration-500">
+
+              {/* Laser Scanner Animation */}
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 group"
-              >
-                <div className="h-48 overflow-hidden relative">
-                  <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-sm px-3 py-1 rounded text-sm font-semibold text-gray-900">
-                    {event.type}
-                  </div>
-                  <img src={event.image} alt={event.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                className="absolute top-0 bottom-0 left-0 w-12 bg-gradient-to-r from-transparent via-[#B6F000]/20 to-transparent z-0 skew-x-12 blend-screen pointer-events-none"
+                animate={{ x: ["-100%", "500%"] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              />
+
+              <div className="h-[60px] shrink-0 relative z-10 flex items-center justify-between border-b border-white/5 mb-4">
+                <h3 className="text-lg font-heading font-bold text-[#E6EDF3]">Event Timeline</h3>
+                <span className="text-xs font-mono text-[#8B949E] bg-[#0E1117] px-2 py-1 rounded">Scanner Active</span>
+              </div>
+
+              <div className="relative z-10 flex-1 overflow-y-auto pr-1.5 custom-scrollbar overscroll-contain">
+                <div className="space-y-4 pb-4">
+                  {["Web Dev Stack", "AI/ML Models", "Core CS Systems", "Open Source Prep"].map((track, i) => (
+                    <div key={i} className="flex items-center gap-4 bg-[#0E1117] p-3 rounded-lg border border-white/5">
+                      <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center font-mono text-xs text-[#B6F000] border border-white/10">
+                        T{i + 1}
+                      </div>
+                      <div>
+                        <h4 className="text-[#E6EDF3] font-mono text-sm font-bold">{track}</h4>
+                        <div className="w-48 h-1 bg-white/10 rounded-full mt-2 overflow-hidden">
+                          <motion.div
+                            className="h-full bg-gradient-to-r from-[#0F9D58] to-[#B6F000]"
+                            initial={{ width: 0 }}
+                            animate={{ width: `${Math.random() * 60 + 20}%` }}
+                            transition={{ duration: 2, delay: i * 0.2 }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center text-sm text-gray-500 mb-3">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    {event.date}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#0F9D58] transition-colors">{event.title}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{event.description}</p>
-                  <a href="#" className="inline-flex items-center font-semibold text-[#0F9D58] hover:text-[#0c8a4d]">
-                    Learn More <ArrowRight className="w-4 h-4 ml-1" />
-                  </a>
+              </div>
+            </div>
+
+            {/* Module 3: Open Source Stream */}
+            <div className="h-[60vh] lg:h-full bg-[#161B22]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col font-mono text-sm relative group hover:border-[#E6EDF3]/50 transition-colors duration-500">
+              <div className="h-[60px] shrink-0 flex items-center justify-between border-b border-white/5 mb-4">
+                <h3 className="text-lg font-heading font-bold text-[#E6EDF3]">Terminal Feed</h3>
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
                 </div>
-              </motion.div>
-            ))}
+              </div>
+
+              <div className="flex-1 bg-[#0E1117] rounded-xl p-4 border border-white/5 relative flex flex-col">
+                <div className="flex-1 overflow-y-auto pr-1.5 custom-scrollbar overscroll-contain mb-8">
+                  <div className="space-y-3">
+                    <AnimatePresence initial={false}>
+                      {visibleTerminalLines.map((item) => (
+                        <TerminalLine key={item.id} item={item} stats={terminalStats} />
+                      ))}
+                    </AnimatePresence>
+                  </div>
+                </div>
+
+                {/* Blinking Cursor */}
+                <div className="absolute bottom-4 left-4 flex items-center gap-2">
+                  <ChevronRight className="w-4 h-4 text-[#0F9D58]" />
+                  <motion.div
+                    className="w-2 h-4 bg-[#B6F000]"
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.8, repeat: Infinity, ease: "stepEnd" }}
+                  />
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* 🔹 Section 4 - Team */}
-      <section className="py-[100px] bg-white">
-        <div className="container mx-auto px-4 lg:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">Meet The Team</h2>
-            <p className="text-gray-600 font-sans text-lg">
-              The passionate individuals driving the GeeksforGeeks chapter at KDKCE.
+      {/* 🔹 Manifesto Section */}
+      <section className="py-32 bg-[#0E1117] relative overflow-hidden flex items-center justify-center min-h-[80vh]">
+        {/* Wireframe Grid */}
+        <div className="absolute inset-0 bg-[#0E1117]" />
+        <motion.div
+          className="absolute inset-0 bg-[linear-gradient(rgba(15,157,88,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(15,157,88,0.2)_1px,transparent_1px)] bg-[size:60px_60px] origin-bottom"
+          style={{ transform: "perspective(1000px) rotateX(60deg) scale(2)" }}
+          animate={{ backgroundPosition: ["0px 0px", "0px 60px"] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0E1117] via-[#0E1117]/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0E1117] via-transparent to-transparent" />
+
+        <div className="container mx-auto px-6 lg:px-12 relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="max-w-4xl mx-auto space-y-12"
+          >
+            <p className="text-2xl md:text-3xl lg:text-4xl font-sans font-medium text-[#8B949E] opacity-60">
+              Most students learn to pass exams.
             </p>
+            <h2 className="text-5xl md:text-6xl lg:text-8xl font-heading font-extrabold text-[#E6EDF3] tracking-tight drop-shadow-[0_0_20px_rgba(182,240,0,0.2)]">
+              We train to <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0F9D58] to-[#B6F000] italic pr-2">solve problems.</span>
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-[#0F9D58] to-[#B6F000] mx-auto rounded-full shadow-[0_0_15px_rgba(15,157,88,0.5)]" />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 🔹 Hall of Fame Protocol (Winners) */}
+      <section className="relative bg-[#0E1117]">
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
+          <div className="absolute top-24 z-50 text-center w-full">
+            <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-[#E6EDF3] tracking-tight">
+              Hall of Fame <span className="text-[#0F9D58]">Protocol</span>
+            </h2>
+            <p className="text-[#8B949E] font-mono mt-2">Elite performers mapped into the system.</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center text-center group"
-              >
-                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden mb-4 border-4 border-gray-50">
-                  <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          {[
+            { id: 1, contest: "Smart India Hackathon 2024", achievement: "National Finalists", color: "from-blue-600/20 to-cyan-500/20" },
+            { id: 2, contest: "GFG Weekly Coding #124", achievement: "Global Rank 12", color: "from-[#0F9D58]/20 to-[#B6F000]/20" },
+            { id: 3, contest: "Google HashCode", achievement: "Top 50 India", color: "from-amber-500/20 to-orange-400/20" },
+          ].map((winner, idx) => (
+            <motion.div
+              key={winner.id}
+              initial={{ y: 500, opacity: 0, scale: 0.8 }}
+              whileInView={{ y: 0, opacity: 1, scale: 1 }}
+              viewport={{ margin: "-100px", once: false }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="absolute w-[90%] max-w-4xl h-[50vh] min-h-[400px] bg-[#161B22]/80 backdrop-blur-3xl border border-white/10 rounded-3xl flex flex-col items-center justify-center shadow-[0_20px_50px_rgba(0,0,0,0.5)] cursor-default overflow-hidden"
+              style={{ top: `calc(50% - 200px + ${idx * 40}px)`, zIndex: idx }}
+            >
+              <div className={`absolute inset-0 bg-gradient-to-br ${winner.color} opacity-40 mix-blend-screen pointer-events-none`} />
+
+              <div className="relative z-10 text-center">
+                <div className="w-20 h-20 mx-auto rounded-full bg-[#0E1117] border border-white/10 flex items-center justify-center mb-6 shadow-glow relative">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#0F9D58] to-[#B6F000] rounded-full blur-[20px] opacity-30 animate-pulse" />
+                  <Trophy className="w-8 h-8 text-[#B6F000]" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900">{member.name}</h3>
-                <p className="text-[#0F9D58] font-medium text-sm mb-3">{member.role}</p>
-                <a href="#" className="text-gray-400 hover:text-[#0a66c2] transition-colors">
-                  <Linkedin className="w-5 h-5" />
-                </a>
+                <h3 className="text-3xl md:text-4xl font-heading font-bold text-[#E6EDF3] mb-2 drop-shadow-lg">
+                  {winner.contest}
+                </h3>
+                <p className="text-[#B6F000] font-mono text-xl tracking-widest uppercase glow-text">
+                  {winner.achievement}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        {/* Spacer for scroll */}
+        <div className="h-[200vh]" />
+      </section>
+
+      {/* 🔹 The Core System (Team) */}
+      <section className="py-32 bg-[#0E1117] relative border-t border-white/5">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="mb-16">
+            <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-[#E6EDF3] mb-4">
+              The <span className="text-[#0F9D58]">Core System</span>
+            </h2>
+            <p className="text-[#8B949E] font-mono text-sm max-w-xl border-l-2 border-[#B6F000] pl-4">Authorized personnel. Root access granted.</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 group/grid">
+            {[
+              { name: "A. Badhe", role: "Chairperson", type: "Core Lead", image: "/ap.png" },
+              { name: "Dr. Varghese", role: "Principal", type: "Faculty", image: "/principal.jpg" },
+              { name: "R. Pande", role: "Technical Head", type: "Tech Team", image: "/image.png" },
+              { name: "S. Wagh", role: "Design Head", type: "Tech Team", image: "/sk.png" },
+            ].map((member, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                whileHover={{ rotateX: 5, rotateY: -5, scale: 1.02 }}
+                className="group relative bg-[#161B22]/50 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:border-[#0F9D58] hover:shadow-[0_0_30px_rgba(15,157,88,0.2)]"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0E1117] via-[#0E1117]/50 to-transparent z-10" />
+                <img src={member.image} alt={member.name} className="w-full h-80 object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-500 opacity-60 group-hover:opacity-100" />
+
+                <div className="absolute bottom-0 left-0 right-0 p-6 z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-[#0E1117] to-transparent">
+                  <span className="text-[10px] font-mono text-[#B6F000] uppercase tracking-wider mb-2 block">{member.type}</span>
+                  <h3 className="text-xl font-heading font-bold text-[#E6EDF3]">{member.name}</h3>
+                  <p className="text-[#8B949E] text-sm font-mono mb-2">{member.role}</p>
+
+                  {/* Social Icons Slide Up */}
+                  <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 h-0 group-hover:h-auto overflow-hidden">
+                    <a href="#" className="text-white hover:text-[#0F9D58] transition-colors"><Linkedin className="w-5 h-5" /></a>
+                    <a href="#" className="text-white hover:text-[#0F9D58] transition-colors"><Github className="w-5 h-5" /></a>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* 🔹 Collaboration Portal (Contact) */}
+      <section className="py-32 bg-[#0E1117] relative border-t border-white/5">
+        <div className="container mx-auto px-6 lg:px-12 flex flex-col md:flex-row gap-12 items-center justify-between">
+          <div className="max-w-xl">
+            <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-[#E6EDF3] mb-6">
+              Establish <span className="text-[#0F9D58]">Connection</span>
+            </h2>
+            <p className="text-[#8B949E] font-sans text-lg mb-8">
+              Open a secure channel to our core team for collaborations, sponsorships, or technical inquiries.
+            </p>
+
+            <div className="flex items-center gap-3 bg-[#161B22]/80 w-max px-4 py-2 rounded-full border border-white/10 shadow-glow mb-8">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#B6F000] animate-pulse shadow-[0_0_10px_rgba(182,240,0,0.8)]" />
+              <span className="text-sm font-mono text-[#E6EDF3] tracking-wide">System Status: Active</span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { label: "Email", val: "gfg@kdkce.edu.in", icon: <Mail className="w-5 h-5" /> },
+                { label: "LinkedIn", val: "gfg-kdkce", icon: <Linkedin className="w-5 h-5" /> },
+                { label: "Instagram", val: "@gfg_kdkce", icon: <Instagram className="w-5 h-5" /> },
+                { label: "Website", val: "kdkce.edu.in", icon: <Globe className="w-5 h-5" /> }
+              ].map((item, idx) => (
+                <a key={idx} href="#" className="flex items-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#0F9D58]/50 transition-all group">
+                  <div className="text-[#8B949E] group-hover:text-[#B6F000] transition-colors">{item.icon}</div>
+                  <div className="overflow-hidden">
+                    <div className="text-[10px] font-mono text-[#8B949E] uppercase">{item.label}</div>
+                    <div className="text-sm font-medium text-[#E6EDF3] truncate max-w-[120px]">{item.val}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="w-full md:w-[400px] bg-[#161B22]/60 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0F9D58] to-[#B6F000]" />
+            <h3 className="text-xl font-heading font-bold text-[#E6EDF3] mb-6">Transmit Message</h3>
+            <form className="space-y-4">
+              <div>
+                <input type="text" placeholder="Designation / Identifier" className="w-full bg-[#0E1117] border border-white/10 rounded-lg p-3 text-[#E6EDF3] font-mono text-sm focus:outline-none focus:border-[#0F9D58] transition-colors" />
+              </div>
+              <div>
+                <input type="email" placeholder="Return Address" className="w-full bg-[#0E1117] border border-white/10 rounded-lg p-3 text-[#E6EDF3] font-mono text-sm focus:outline-none focus:border-[#0F9D58] transition-colors" />
+              </div>
+              <div>
+                <textarea rows={4} placeholder="Payload..." className="w-full bg-[#0E1117] border border-white/10 rounded-lg p-3 text-[#E6EDF3] font-mono text-sm focus:outline-none focus:border-[#0F9D58] transition-colors resize-none" />
+              </div>
+              <button className="w-full py-3 rounded-lg bg-[#0F9D58] text-[#E6EDF3] font-mono font-bold hover:bg-[#0c8a4d] transition-colors flex items-center justify-center gap-2 group border border-[#0F9D58]/50 shadow-[0_0_15px_rgba(15,157,88,0.3)]">
+                Execute Send <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 Membership CTA (Join) */}
+      <section id="join" className="py-32 bg-[#0E1117] relative border-t border-white/5 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(15,157,88,0.1)_0%,transparent_100%)] pointer-events-none" />
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-[#E6EDF3] mb-4">
+              Join the Engineering <span className="text-[#0F9D58]">Network</span>
+            </h2>
+            <p className="text-[#8B949E] font-mono text-sm max-w-xl mx-auto">Select your access level and initialize your journey.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-center">
+            {/* Explorer */}
+            <div className="bg-[#161B22]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col items-center text-center transition-transform hover:scale-105">
+              <h3 className="text-xl font-heading font-bold text-[#E6EDF3] mb-2">Explorer</h3>
+              <p className="text-[#8B949E] font-mono text-xs mb-8">Lvl 1 - Beginner Access</p>
+              <ul className="space-y-3 mb-8 text-sm text-[#8B949E] text-left w-full">
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0F9D58]" /> Campus Workshops</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0F9D58]" /> Community Discord</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0F9D58]" /> Coding Resources</li>
+              </ul>
+              <button className="w-full py-3 rounded-xl border border-[#0F9D58]/30 text-[#E6EDF3] font-mono font-bold hover:bg-[#0F9D58]/10 transition-colors">
+                Initialize
+              </button>
+            </div>
+
+            {/* Builder (Highlighted) */}
+            <div className="bg-gradient-to-b from-[#0F9D58] to-[#0c8a4d] rounded-3xl p-8 flex flex-col items-center text-center transform md:scale-110 shadow-[0_0_40px_rgba(15,157,88,0.3)] relative overflow-hidden z-20 border border-[#B6F000]/30 transition-transform hover:scale-110 md:hover:scale-110 group cursor-pointer">
+              <div className="absolute top-0 right-0 bg-[#B6F000] text-[#0E1117] text-[10px] font-bold px-3 py-1 rounded-bl-lg font-mono tracking-wider">RECOMMENDED</div>
+              <h3 className="text-2xl font-heading font-bold text-white mb-2 mt-2 group-hover:drop-shadow-lg transition-all">Builder</h3>
+              <p className="text-white/80 font-mono text-xs mb-8">Lvl 2 - Active Member Access</p>
+              <ul className="space-y-3 mb-8 text-sm text-white/90 text-left w-full">
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#B6F000]" /> Hackathon Teams</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#B6F000]" /> Open Source Projects</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#B6F000]" /> Mentorship Mux</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#B6F000]" /> Priority Event Reg</li>
+              </ul>
+              <button className="relative group/btn w-full overflow-hidden rounded-xl bg-[#B6F000] px-4 py-3 text-[#0E1117] font-mono font-bold transition-transform hover:scale-105 shadow-[0_0_15px_rgba(182,240,0,0.5)]">
+                <div className="absolute inset-0 bg-white/30 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out" />
+                <span className="relative z-10 flex justify-center items-center gap-2">Request Upgrade <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" /></span>
+              </button>
+            </div>
+
+            {/* Elite */}
+            <div className="bg-[#161B22]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col items-center text-center transition-transform hover:scale-105">
+              <h3 className="text-xl font-heading font-bold text-[#E6EDF3] mb-2">Elite</h3>
+              <p className="text-[#8B949E] font-mono text-xs mb-8">Lvl 3 - Core Team Access</p>
+              <ul className="space-y-3 mb-8 text-sm text-[#8B949E] text-left w-full">
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0F9D58]" /> Admin Privileges</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0F9D58]" /> Global GFG Network</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0F9D58]" /> Event Organization</li>
+              </ul>
+              <button className="w-full py-3 rounded-xl border border-white/10 text-[#8B949E] font-mono font-bold hover:bg-white/5 transition-colors hover:text-white">
+                Apply for Core
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </Layout>
   );
 };
+
+// Memoized terminal line to prevent re-renders of older lines
+const TerminalLine = memo(({ item, stats }: { item: { id: number, lineIdx: number }, stats: any[] }) => {
+  const terminalStat = stats[item.lineIdx];
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -10 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, filter: "blur(4px)" }}
+      className="flex items-start gap-3"
+    >
+      <span className="mt-0.5">{terminalStat.icon}</span>
+      <span className="text-[#8B949E]">{terminalStat.text}</span>
+    </motion.div>
+  );
+});
 
 export default Index;
