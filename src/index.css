@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,21 +10,21 @@
 
   :root,
   .dark {
-    /* Strict "Algorithmic Academia" Color System */
-    --background: 220 24% 7%;
-    /* #0E1117 Deep Slate */
+    /* Cyberpunk Interface Color System */
+    --background: 222 47% 4%;
+    /* #020617 */
     --foreground: 210 33% 92%;
-    /* #E6EDF3 */
 
-    --primary: 151 82% 34%;
-    /* #0F9D58 GFG Green */
-    --primary-foreground: 0 0% 100%;
+    --primary: 157 100% 50%;
+    /* #00FF9C Neon Green */
+    --secondary: 196 100% 65%;
+    /* #4FD1FF Sky Blue */
+    --accent: 271 100% 68%;
+    /* #9B5CFF Violet */
+    --warning: 0 100% 61%;
+    /* #FF3B3B Red */
 
-    --secondary: 75 100% 47%;
-    /* #B6F000 Electric Lime */
-    --secondary-foreground: 220 24% 7%;
-
-    --card: 220 24% 9%;
+    --card: 222 47% 6%;
     --card-foreground: 210 33% 92%;
 
     --popover: 220 24% 9%;
@@ -30,38 +32,26 @@
 
     --muted: 220 20% 13%;
     --muted-foreground: 212 12% 58%;
-    /* #8B949E */
 
-    --accent: 151 82% 34%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 220 20% 15%;
+    --border: 217 33% 17%;
     --input: 220 20% 15%;
-    --ring: 151 82% 34%;
+    --ring: 157 100% 50%;
 
     --radius: 1rem;
+
+    /* Animations & Gradients */
+    --cyan-glow: hsla(196, 100%, 65%, 0.3);
+    --green-glow: hsla(157, 100%, 50%, 0.3);
+  }
+
+  :root {
+    --font-heading: 'Space Grotesk', sans-serif;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
 
-  /* Global subtle noise */
-  body::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.04;
-    z-index: 9999;
-  }
 }
 
 
@@ -157,8 +147,63 @@
   }
 
   50% {
-    transform: translateY(-20px) rotate(5deg);
+    transform: translateY(-20px) rotate(2deg);
   }
+}
+
+@keyframes circuit-travel {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes holographic-flicker {
+  0% {
+    opacity: 0.8;
+  }
+
+  5% {
+    opacity: 0.2;
+  }
+
+  10% {
+    opacity: 0.8;
+  }
+
+  15% {
+    opacity: 0.4;
+  }
+
+  20% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.animate-circuit {
+  stroke-dasharray: 1000;
+  animation: circuit-travel 10s linear infinite;
+}
+
+.animate-hologram {
+  animation: holographic-flicker 4s infinite;
 }
 
 @keyframes pulse-glow {

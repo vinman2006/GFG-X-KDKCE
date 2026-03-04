@@ -55,6 +55,7 @@ const HeroSection = () => {
 
       {/* 3D Canvas Env */}
       <div className="hero-canvas absolute inset-0 z-20 pointer-events-auto">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0E1117] via-transparent to-[#0E1117] z-10 pointer-events-none" />
         <Spline scene="https://prod.spline.design/M0wTt8Ij2Vpdvotm/scene.splinecode" />
       </div>
 

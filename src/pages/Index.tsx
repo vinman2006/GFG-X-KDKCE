@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, memo } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Layout from "@/components/Layout";
 import HeroSection from "@/components/HeroSection";
+import ModulesSection from "@/components/modules/ModulesSection";
 import { Terminal, TrendingUp, TrendingDown, GitCommit, GitPullRequest, CheckCircle2, ChevronRight, Trophy, Github, Linkedin, Mail, Instagram, Globe } from "lucide-react";
 
 const Index = () => {
@@ -59,8 +60,6 @@ const Index = () => {
       {/* 🔹 Interactive Modules Section */}
       <section className="py-24 bg-[#0E1117] relative overflow-hidden border-t border-white/5">
 
-        {/* Subtle grid background */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_20%,transparent_100%)] pointer-events-none" />
 
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
           <div className="mb-16">
@@ -73,130 +72,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="flex flex-col lg:grid lg:grid-cols-3 gap-8 lg:h-[80vh] lg:max-h-[900px] lg:overflow-hidden">
-
-            {/* Module 1: Competitive Arena */}
-            <div className="h-[60vh] lg:h-full bg-[#161B22]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col group hover:border-[#0F9D58]/50 transition-colors duration-500">
-              <div className="h-[60px] shrink-0 flex items-center justify-between border-b border-white/5 mb-4">
-                <h3 className="text-lg font-heading font-bold text-[#E6EDF3] flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#0F9D58] animate-pulse" />
-                  Live Arena
-                </h3>
-                <span className="text-xs font-mono text-[#8B949E] bg-[#0E1117] px-2 py-1 rounded">Rankings</span>
-              </div>
-
-              <div className="flex-1 overflow-y-auto pr-1.5 custom-scrollbar overscroll-contain">
-                <div className="space-y-3 relative pb-4">
-                  <AnimatePresence mode="popLayout">
-                    {leaderboard.map((user, idx) => (
-                      <motion.div
-                        layout
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                        key={user.name}
-                        className="bg-[#0E1117] rounded-xl p-4 flex items-center justify-between border border-white/5 relative overflow-hidden"
-                      >
-                        {/* Rank Indicator */}
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#0F9D58] to-[#B6F000] opacity-50" />
-
-                        <div className="flex items-center gap-3">
-                          <span className="text-[#8B949E] font-mono text-sm w-4">0{idx + 1}</span>
-                          <div>
-                            <p className="text-[#E6EDF3] font-mono font-bold text-sm">{user.name}</p>
-                            <span className="text-[10px] text-[#B6F000] border border-[#B6F000]/30 px-1.5 py-0.5 rounded backdrop-blur-sm uppercase">{user.tag}</span>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <span className="font-mono text-[#E6EDF3] font-bold">{user.score}</span>
-                          {user.trend === "up" ? (
-                            <TrendingUp className="w-4 h-4 text-[#0F9D58] animate-bounce" />
-                          ) : (
-                            <TrendingDown className="w-4 h-4 text-red-400" />
-                          )}
-                        </div>
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
-                </div>
-              </div>
-            </div>
-
-            {/* Module 2: Workshop Engine */}
-            <div className="h-[60vh] lg:h-full bg-[#161B22]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col relative overflow-hidden group hover:border-[#B6F000]/50 transition-colors duration-500">
-
-              {/* Laser Scanner Animation */}
-              <motion.div
-                className="absolute top-0 bottom-0 left-0 w-12 bg-gradient-to-r from-transparent via-[#B6F000]/20 to-transparent z-0 skew-x-12 blend-screen pointer-events-none"
-                animate={{ x: ["-100%", "500%"] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              />
-
-              <div className="h-[60px] shrink-0 relative z-10 flex items-center justify-between border-b border-white/5 mb-4">
-                <h3 className="text-lg font-heading font-bold text-[#E6EDF3]">Event Timeline</h3>
-                <span className="text-xs font-mono text-[#8B949E] bg-[#0E1117] px-2 py-1 rounded">Scanner Active</span>
-              </div>
-
-              <div className="relative z-10 flex-1 overflow-y-auto pr-1.5 custom-scrollbar overscroll-contain">
-                <div className="space-y-4 pb-4">
-                  {["Web Dev Stack", "AI/ML Models", "Core CS Systems", "Open Source Prep"].map((track, i) => (
-                    <div key={i} className="flex items-center gap-4 bg-[#0E1117] p-3 rounded-lg border border-white/5">
-                      <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center font-mono text-xs text-[#B6F000] border border-white/10">
-                        T{i + 1}
-                      </div>
-                      <div>
-                        <h4 className="text-[#E6EDF3] font-mono text-sm font-bold">{track}</h4>
-                        <div className="w-48 h-1 bg-white/10 rounded-full mt-2 overflow-hidden">
-                          <motion.div
-                            className="h-full bg-gradient-to-r from-[#0F9D58] to-[#B6F000]"
-                            initial={{ width: 0 }}
-                            animate={{ width: `${Math.random() * 60 + 20}%` }}
-                            transition={{ duration: 2, delay: i * 0.2 }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Module 3: Open Source Stream */}
-            <div className="h-[60vh] lg:h-full bg-[#161B22]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col font-mono text-sm relative group hover:border-[#E6EDF3]/50 transition-colors duration-500">
-              <div className="h-[60px] shrink-0 flex items-center justify-between border-b border-white/5 mb-4">
-                <h3 className="text-lg font-heading font-bold text-[#E6EDF3]">Terminal Feed</h3>
-                <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                </div>
-              </div>
-
-              <div className="flex-1 bg-[#0E1117] rounded-xl p-4 border border-white/5 relative flex flex-col">
-                <div className="flex-1 overflow-y-auto pr-1.5 custom-scrollbar overscroll-contain mb-8">
-                  <div className="space-y-3">
-                    <AnimatePresence initial={false}>
-                      {visibleTerminalLines.map((item) => (
-                        <TerminalLine key={item.id} item={item} stats={terminalStats} />
-                      ))}
-                    </AnimatePresence>
-                  </div>
-                </div>
-
-                {/* Blinking Cursor */}
-                <div className="absolute bottom-4 left-4 flex items-center gap-2">
-                  <ChevronRight className="w-4 h-4 text-[#0F9D58]" />
-                  <motion.div
-                    className="w-2 h-4 bg-[#B6F000]"
-                    animate={{ opacity: [1, 0] }}
-                    transition={{ duration: 0.8, repeat: Infinity, ease: "stepEnd" }}
-                  />
-                </div>
-              </div>
-            </div>
-
-          </div>
+          <ModulesSection />
         </div>
       </section>
 
@@ -204,12 +80,6 @@ const Index = () => {
       <section className="py-32 bg-[#0E1117] relative overflow-hidden flex items-center justify-center min-h-[80vh]">
         {/* Wireframe Grid */}
         <div className="absolute inset-0 bg-[#0E1117]" />
-        <motion.div
-          className="absolute inset-0 bg-[linear-gradient(rgba(15,157,88,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(15,157,88,0.2)_1px,transparent_1px)] bg-[size:60px_60px] origin-bottom"
-          style={{ transform: "perspective(1000px) rotateX(60deg) scale(2)" }}
-          animate={{ backgroundPosition: ["0px 0px", "0px 60px"] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-        />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0E1117] via-[#0E1117]/80 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0E1117] via-transparent to-transparent" />
 
