@@ -34,7 +34,7 @@ const Footer = () => {
             <div className="grid grid-cols-2 gap-3">
               <Link to="/" className="text-gray-400 hover:text-[#0F9D58] transition-colors">Home</Link>
               <Link to="/about" className="text-gray-400 hover:text-[#0F9D58] transition-colors">About Us</Link>
-              <Link to="/events" className="text-gray-400 hover:text-[#0F9D58] transition-colors">Events</Link>
+              <a href="/#events" className="text-gray-400 hover:text-[#0F9D58] transition-colors">Events</a>
               <Link to="/team" className="text-gray-400 hover:text-[#0F9D58] transition-colors">Team</Link>
               <Link to="/contact" className="text-gray-400 hover:text-[#0F9D58] transition-colors">Contact</Link>
             </div>

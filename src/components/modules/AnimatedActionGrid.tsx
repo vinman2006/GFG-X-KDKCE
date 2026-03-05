@@ -208,7 +208,6 @@ const ActionCard = forwardRef<HTMLDivElement, { item: typeof actions[0], isActiv
             />
         </motion.div>
     );
-    );
 });
 
 function TypingText({ text, isHovered }: { text: string, isHovered: boolean }) {

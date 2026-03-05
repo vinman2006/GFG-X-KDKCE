@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Layout from "@/components/Layout";
 import HeroSection from "@/components/HeroSection";
+import CollegeSection from "@/components/CollegeSection";
 import ModulesSection from "@/components/modules/ModulesSection";
+import EventSection from "@/components/EventSection";
 import { Terminal, TrendingUp, TrendingDown, GitCommit, GitPullRequest, CheckCircle2, ChevronRight, Trophy, Github, Linkedin, Mail, Instagram, Globe } from "lucide-react";
 
 const Index = () => {
@@ -57,6 +59,7 @@ const Index = () => {
   return (
     <Layout>
       <HeroSection />
+      <CollegeSection />
 
       {/* 🔹 Interactive Modules Section */}
       <section className="py-24 bg-[#0E1117] relative overflow-hidden border-t border-white/5">
@@ -104,70 +107,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* 🔹 Upcoming Events Section */}
-      <section id="events" className="py-24 bg-[#0E1117] relative overflow-hidden border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="mb-16">
-            <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-[#E6EDF3] mb-4">
-              Upcoming <span className="text-[#0F9D58] font-mono italic font-normal tracking-tight">Events</span>
-            </h2>
-            <p className="text-[#8B949E] font-mono text-sm max-w-xl border-l-2 border-[#B6F000] pl-4">
-              Join our upcoming sessions, workshops, and hackathons.
-              <br />Status: 1 Event Pending.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="group relative bg-[#161B22] border border-white/10 rounded-3xl p-8 hover:border-[#0F9D58]/50 transition-all duration-500 overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#0F9D58]/20 to-transparent blur-2xl group-hover:from-[#0F9D58]/40 transition-all duration-500" />
-
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-[#0F9D58]/10 border border-[#0F9D58]/30 flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-[#0F9D58]" />
-                </div>
-                <div>
-                  <span className="text-[#B6F000] font-mono text-xs tracking-widest uppercase">Bootcamp // 2024</span>
-                  <h3 className="text-2xl font-bold text-white">Advanced DSA Workshop</h3>
-                </div>
-              </div>
-
-              <p className="text-[#8B949E] mb-8 leading-relaxed">
-                Master complex algorithms and data structures with hands-on problem-solving sessions. Details about registration and schedule will be provided soon.
-              </p>
-
-              <div className="flex items-center gap-6">
-                <div className="flex items-center gap-2 text-[#E6EDF3]/80 font-mono text-xs">
-                  <Globe className="w-4 h-4 text-[#0F9D58]" />
-                  <span>Venue: Online / Lab 4</span>
-                </div>
-                <div className="flex items-center gap-2 text-[#E6EDF3]/80 font-mono text-xs">
-                  <Mail className="w-4 h-4 text-[#0F9D58]" />
-                  <span>RSVP Open Soon</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <div className="flex flex-col justify-center space-y-6">
-              <div className="p-6 bg-white/5 rounded-2xl border border-dashed border-white/10">
-                <h4 className="text-lg font-bold text-white mb-2">Want to host an event?</h4>
-                <p className="text-sm text-[#8B949E] mb-4">Collaborate with our technical team to bring your ideas to life.</p>
-                <Link to="/contact" className="inline-flex items-center text-[#0F9D58] hover:text-[#B6F000] font-mono text-sm transition-colors">
-                  Get in touch <ChevronRight className="w-4 h-4 ml-1" />
-                </Link>
-              </div>
-              <div className="p-6 bg-white/5 rounded-2xl border border-dashed border-white/10 opacity-50">
-                <h4 className="text-lg font-bold text-white mb-2">Hack-o-sphere 2.0</h4>
-                <p className="text-sm text-[#8B949E]">Stay tuned for the biggest hackathon of the semester.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <EventSection />
 
       {/* 🔹 Hall of Fame Protocol (Winners) */}
       <section className="relative bg-[#0E1117]">
