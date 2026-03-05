@@ -14,41 +14,53 @@ export default function OrbitingNodesBox() {
     const [hoveredNode, setHoveredNode] = useState<string | null>(null);
 
     return (
-        <div className="relative w-full h-[400px] bg-[#020617]/80 backdrop-blur-2xl border border-white/5 rounded-3xl overflow-hidden group shadow-[0_0_50px_rgba(79,209,255,0.05)] flex items-center justify-center">
+        <div className="relative w-full h-full min-h-[300px] bg-[rgba(10,15,30,0.55)] backdrop-blur-[20px] rounded-[28px] overflow-hidden group shadow-[0_10px_40px_rgba(0,0,0,0.35)] flex items-center justify-center border border-white/5">
+
+            {/* Background Glow */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(15,157,88,0.1),transparent_70%)]" />
 
             {/* Background Radar Rings */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-10">
+            <div className="absolute inset-0 flex items-center justify-center opacity-20">
                 {[60, 80, 100, 120, 140, 160].map((r) => (
                     <div
                         key={r}
-                        className="absolute rounded-full border border-white/40"
+                        className="absolute rounded-full border border-[#0F9D58]/20 bg-transparent"
                         style={{ width: r * 2, height: r * 2 }}
                     />
                 ))}
                 {/* Radar sweep */}
                 <motion.div
-                    className="absolute w-full h-full bg-[conic-gradient(from_0deg,transparent_0%,rgba(79,209,255,0.1)_50%,transparent_100%)]"
+                    className="absolute w-full h-full bg-[conic-gradient(from_0deg,transparent_0%,rgba(15,157,88,0.1)_50%,transparent_100%)]"
                     animate={{ rotate: 360 }}
-                    transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
+                    transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
                 />
             </div>
-
-            {/* Connection Lines (Center to Hub) */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
-                <circle cx="50%" cy="50%" r="20" fill="none" stroke="#4FD1FF" strokeWidth="1" className="animate-pulse" />
-            </svg>
 
             {/* Center Hub */}
             <div className="relative z-20 flex flex-col items-center">
                 <motion.div
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ repeat: Infinity, duration: 4 }}
-                    className="w-16 h-16 rounded-full bg-[#4FD1FF]/10 border border-[#4FD1FF]/40 backdrop-blur-3xl flex items-center justify-center shadow-[0_0_30px_rgba(79,209,255,0.2)]"
+                    animate={{
+                        scale: [1, 1.05, 1],
+                        rotate: [0, 5, -5, 0]
+                    }}
+                    transition={{
+                        repeat: Infinity,
+                        duration: 6,
+                        ease: "easeInOut"
+                    }}
+                    className="w-20 h-20 rounded-2xl bg-white border-2 border-[#0F9D58] backdrop-blur-3xl flex items-center justify-center shadow-[0_0_40px_rgba(15,157,88,0.4)] relative overflow-hidden"
                 >
-                    <span className="text-[#4FD1FF] font-black text-2xl font-heading">G</span>
+                    <div className="absolute inset-0 bg-[#0F9D58]/5 rounded-2xl animate-pulse" />
+                    <img
+                        src="/gfg-kdkce.png"
+                        alt="GFG Logo"
+                        className="w-14 h-14 object-contain relative z-10 p-1"
+                    />
                 </motion.div>
-                <div className="mt-4 text-[10px] font-mono font-bold text-[#E6EDF3] tracking-widest uppercase text-center">
-                    TECHNICAL CLUB
+                <div className="mt-4 px-3 py-1 bg-white/5 border border-white/10 rounded-full">
+                    <span className="text-[10px] font-mono font-bold text-[#E6EDF3] tracking-widest uppercase text-center block">
+                        KDKCE CHAPTER
+                    </span>
                 </div>
             </div>
 
@@ -58,31 +70,38 @@ export default function OrbitingNodesBox() {
                     key={i}
                     className="absolute z-30 flex items-center justify-center"
                     animate={{ rotate: 360 }}
-                    transition={{ repeat: Infinity, duration: 20 / node.speed, ease: "linear" }}
+                    transition={{ repeat: Infinity, duration: 25 / node.speed, ease: "linear" }}
                     style={{ width: node.radius * 2, height: node.radius * 2 }}
                 >
                     <motion.div
                         className="absolute top-0 flex flex-col items-center"
-                        style={{ rotate: -360 }} // Counter-rotate to keep text upright
-                        animate={{ rotate: -360 }}
-                        transition={{ repeat: Infinity, duration: 20 / node.speed, ease: "linear" }}
+                        animate={{ rotate: -360 }} // Counter-rotate to keep text upright
+                        transition={{ repeat: Infinity, duration: 25 / node.speed, ease: "linear" }}
                         onMouseEnter={() => setHoveredNode(node.name)}
                         onMouseLeave={() => setHoveredNode(null)}
                     >
                         <motion.div
-                            whileHover={{ scale: 1.5, zIndex: 50 }}
-                            className="w-8 h-8 rounded-full bg-[#020617] border flex items-center justify-center cursor-pointer transition-shadow"
-                            style={{ borderColor: node.color, boxShadow: `0 0 15px ${node.color}44` }}
+                            whileHover={{ scale: 1.3, zIndex: 50 }}
+                            className="w-10 h-10 rounded-xl bg-[#0E1117] border-2 flex items-center justify-center cursor-pointer transition-all duration-300 shadow-lg group-hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                            style={{
+                                borderColor: node.color,
+                                boxShadow: `0 0 20px ${node.color}33`,
+                            }}
                         >
-                            <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: node.color }} />
+                            <div className="w-2.5 h-2.5 rounded-full filter blur-[1px] animate-pulse" style={{ backgroundColor: node.color }} />
                         </motion.div>
+
                         <AnimatePresence>
                             {(hoveredNode === node.name || hoveredNode === null) && (
                                 <motion.div
-                                    initial={{ opacity: 0, y: 5 }}
-                                    animate={{ opacity: hoveredNode === node.name ? 1 : 0.4, y: 0 }}
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{
+                                        opacity: hoveredNode === node.name ? 1 : 0.3,
+                                        scale: 1,
+                                        y: hoveredNode === node.name ? -5 : 0
+                                    }}
                                     exit={{ opacity: 0 }}
-                                    className="mt-2 text-[8px] font-mono font-bold text-white uppercase tracking-tighter"
+                                    className={`mt-2 text-[9px] font-mono font-bold uppercase tracking-tighter ${hoveredNode === node.name ? 'text-white' : 'text-[#8B949E]'}`}
                                 >
                                     {node.name}
                                 </motion.div>
@@ -99,8 +118,9 @@ export default function OrbitingNodesBox() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
-                        className="absolute bottom-8 z-50 px-4 py-2 bg-black/80 backdrop-blur-xl border border-white/10 rounded-full font-mono text-[10px] text-[#4FD1FF] shadow-2xl"
+                        className="absolute bottom-6 z-50 px-6 py-3 bg-[#0F9D58]/10 backdrop-blur-xl border border-[#0F9D58]/30 rounded-2xl font-mono text-xs text-[#E6EDF3] shadow-2xl flex items-center gap-3"
                     >
+                        <div className="w-2 h-2 rounded-full bg-[#B6F000] animate-ping" />
                         {nodes.find(n => n.name === hoveredNode)?.desc}
                     </motion.div>
                 )}

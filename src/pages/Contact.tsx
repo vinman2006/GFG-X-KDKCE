@@ -62,7 +62,7 @@ const Contact = () => {
               Contact Us
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Get in touch with us for events, collaborations, or any queries. 
+              Get in touch with us for events, collaborations, or any queries.
               We're here to help you grow in your coding journey.
             </p>
           </motion.div>
@@ -78,7 +78,7 @@ const Contact = () => {
               <div>
                 <h2 className="text-3xl font-bold mb-6">Get In Touch</h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Whether you're a student looking to join our community or an organization 
+                  Whether you're a student looking to join our community or an organization
                   interested in collaboration, we'd love to hear from you.
                 </p>
               </div>
@@ -145,7 +145,7 @@ const Contact = () => {
                   Visit us at KDK College of Engineering, Nagpur
                 </p>
               </div>
-              
+
               <div className="bg-card rounded-xl overflow-hidden shadow-card border border-border">
                 <div className="aspect-square md:aspect-video">
                   <iframe
@@ -176,10 +176,10 @@ const Contact = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="mt-20 text-center"
           >
-            <div className="bg-gradient-to-r from-primary/10 to-primary-glow/10 rounded-2xl p-12 border border-primary/20">
+            <div id="join" className="bg-gradient-to-r from-primary/10 to-primary-glow/10 rounded-2xl p-12 border border-primary/20">
               <h2 className="text-3xl font-bold mb-4">Ready to Join Us?</h2>
               <p className="text-lg text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Be part of our growing community of passionate programmers and tech enthusiasts. 
+                Be part of our growing community of passionate programmers and tech enthusiasts.
                 Let's code the future together!
               </p>
               <div className="inline-flex items-center space-x-2 text-primary">

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, memo } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Layout from "@/components/Layout";
 import HeroSection from "@/components/HeroSection";
@@ -103,6 +104,71 @@ const Index = () => {
         </div>
       </section>
 
+      {/* 🔹 Upcoming Events Section */}
+      <section id="events" className="py-24 bg-[#0E1117] relative overflow-hidden border-t border-white/5">
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="mb-16">
+            <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-[#E6EDF3] mb-4">
+              Upcoming <span className="text-[#0F9D58] font-mono italic font-normal tracking-tight">Events</span>
+            </h2>
+            <p className="text-[#8B949E] font-mono text-sm max-w-xl border-l-2 border-[#B6F000] pl-4">
+              Join our upcoming sessions, workshops, and hackathons.
+              <br />Status: 1 Event Pending.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="group relative bg-[#161B22] border border-white/10 rounded-3xl p-8 hover:border-[#0F9D58]/50 transition-all duration-500 overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#0F9D58]/20 to-transparent blur-2xl group-hover:from-[#0F9D58]/40 transition-all duration-500" />
+
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-[#0F9D58]/10 border border-[#0F9D58]/30 flex items-center justify-center">
+                  <TrendingUp className="w-6 h-6 text-[#0F9D58]" />
+                </div>
+                <div>
+                  <span className="text-[#B6F000] font-mono text-xs tracking-widest uppercase">Bootcamp // 2024</span>
+                  <h3 className="text-2xl font-bold text-white">Advanced DSA Workshop</h3>
+                </div>
+              </div>
+
+              <p className="text-[#8B949E] mb-8 leading-relaxed">
+                Master complex algorithms and data structures with hands-on problem-solving sessions. Details about registration and schedule will be provided soon.
+              </p>
+
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-2 text-[#E6EDF3]/80 font-mono text-xs">
+                  <Globe className="w-4 h-4 text-[#0F9D58]" />
+                  <span>Venue: Online / Lab 4</span>
+                </div>
+                <div className="flex items-center gap-2 text-[#E6EDF3]/80 font-mono text-xs">
+                  <Mail className="w-4 h-4 text-[#0F9D58]" />
+                  <span>RSVP Open Soon</span>
+                </div>
+              </div>
+            </motion.div>
+
+            <div className="flex flex-col justify-center space-y-6">
+              <div className="p-6 bg-white/5 rounded-2xl border border-dashed border-white/10">
+                <h4 className="text-lg font-bold text-white mb-2">Want to host an event?</h4>
+                <p className="text-sm text-[#8B949E] mb-4">Collaborate with our technical team to bring your ideas to life.</p>
+                <Link to="/contact" className="inline-flex items-center text-[#0F9D58] hover:text-[#B6F000] font-mono text-sm transition-colors">
+                  Get in touch <ChevronRight className="w-4 h-4 ml-1" />
+                </Link>
+              </div>
+              <div className="p-6 bg-white/5 rounded-2xl border border-dashed border-white/10 opacity-50">
+                <h4 className="text-lg font-bold text-white mb-2">Hack-o-sphere 2.0</h4>
+                <p className="text-sm text-[#8B949E]">Stay tuned for the biggest hackathon of the semester.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 🔹 Hall of Fame Protocol (Winners) */}
       <section className="relative bg-[#0E1117]">
         <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
@@ -145,170 +211,10 @@ const Index = () => {
           ))}
         </div>
         {/* Spacer for scroll */}
-        <div className="h-[200vh]" />
-      </section>
-
-      {/* 🔹 The Core System (Team) */}
-      <section className="py-32 bg-[#0E1117] relative border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="mb-16">
-            <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-[#E6EDF3] mb-4">
-              The <span className="text-[#0F9D58]">Core System</span>
-            </h2>
-            <p className="text-[#8B949E] font-mono text-sm max-w-xl border-l-2 border-[#B6F000] pl-4">Authorized personnel. Root access granted.</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 group/grid">
-            {[
-              { name: "A. Badhe", role: "Chairperson", type: "Core Lead", image: "/ap.png" },
-              { name: "Dr. Varghese", role: "Principal", type: "Faculty", image: "/principal.jpg" },
-              { name: "R. Pande", role: "Technical Head", type: "Tech Team", image: "/image.png" },
-              { name: "S. Wagh", role: "Design Head", type: "Tech Team", image: "/sk.png" },
-            ].map((member, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ rotateX: 5, rotateY: -5, scale: 1.02 }}
-                className="group relative bg-[#161B22]/50 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:border-[#0F9D58] hover:shadow-[0_0_30px_rgba(15,157,88,0.2)]"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0E1117] via-[#0E1117]/50 to-transparent z-10" />
-                <img src={member.image} alt={member.name} className="w-full h-80 object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-500 opacity-60 group-hover:opacity-100" />
-
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-[#0E1117] to-transparent">
-                  <span className="text-[10px] font-mono text-[#B6F000] uppercase tracking-wider mb-2 block">{member.type}</span>
-                  <h3 className="text-xl font-heading font-bold text-[#E6EDF3]">{member.name}</h3>
-                  <p className="text-[#8B949E] text-sm font-mono mb-2">{member.role}</p>
-
-                  {/* Social Icons Slide Up */}
-                  <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 h-0 group-hover:h-auto overflow-hidden">
-                    <a href="#" className="text-white hover:text-[#0F9D58] transition-colors"><Linkedin className="w-5 h-5" /></a>
-                    <a href="#" className="text-white hover:text-[#0F9D58] transition-colors"><Github className="w-5 h-5" /></a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        <div className="h-[150vh]" />
       </section>
 
       {/* 🔹 Collaboration Portal (Contact) */}
-      <section className="py-32 bg-[#0E1117] relative border-t border-white/5">
-        <div className="container mx-auto px-6 lg:px-12 flex flex-col md:flex-row gap-12 items-center justify-between">
-          <div className="max-w-xl">
-            <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-[#E6EDF3] mb-6">
-              Establish <span className="text-[#0F9D58]">Connection</span>
-            </h2>
-            <p className="text-[#8B949E] font-sans text-lg mb-8">
-              Open a secure channel to our core team for collaborations, sponsorships, or technical inquiries.
-            </p>
-
-            <div className="flex items-center gap-3 bg-[#161B22]/80 w-max px-4 py-2 rounded-full border border-white/10 shadow-glow mb-8">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#B6F000] animate-pulse shadow-[0_0_10px_rgba(182,240,0,0.8)]" />
-              <span className="text-sm font-mono text-[#E6EDF3] tracking-wide">System Status: Active</span>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { label: "Email", val: "gfg@kdkce.edu.in", icon: <Mail className="w-5 h-5" /> },
-                { label: "LinkedIn", val: "gfg-kdkce", icon: <Linkedin className="w-5 h-5" /> },
-                { label: "Instagram", val: "@gfg_kdkce", icon: <Instagram className="w-5 h-5" /> },
-                { label: "Website", val: "kdkce.edu.in", icon: <Globe className="w-5 h-5" /> }
-              ].map((item, idx) => (
-                <a key={idx} href="#" className="flex items-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-[#0F9D58]/50 transition-all group">
-                  <div className="text-[#8B949E] group-hover:text-[#B6F000] transition-colors">{item.icon}</div>
-                  <div className="overflow-hidden">
-                    <div className="text-[10px] font-mono text-[#8B949E] uppercase">{item.label}</div>
-                    <div className="text-sm font-medium text-[#E6EDF3] truncate max-w-[120px]">{item.val}</div>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="w-full md:w-[400px] bg-[#161B22]/60 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0F9D58] to-[#B6F000]" />
-            <h3 className="text-xl font-heading font-bold text-[#E6EDF3] mb-6">Transmit Message</h3>
-            <form className="space-y-4">
-              <div>
-                <input type="text" placeholder="Designation / Identifier" className="w-full bg-[#0E1117] border border-white/10 rounded-lg p-3 text-[#E6EDF3] font-mono text-sm focus:outline-none focus:border-[#0F9D58] transition-colors" />
-              </div>
-              <div>
-                <input type="email" placeholder="Return Address" className="w-full bg-[#0E1117] border border-white/10 rounded-lg p-3 text-[#E6EDF3] font-mono text-sm focus:outline-none focus:border-[#0F9D58] transition-colors" />
-              </div>
-              <div>
-                <textarea rows={4} placeholder="Payload..." className="w-full bg-[#0E1117] border border-white/10 rounded-lg p-3 text-[#E6EDF3] font-mono text-sm focus:outline-none focus:border-[#0F9D58] transition-colors resize-none" />
-              </div>
-              <button className="w-full py-3 rounded-lg bg-[#0F9D58] text-[#E6EDF3] font-mono font-bold hover:bg-[#0c8a4d] transition-colors flex items-center justify-center gap-2 group border border-[#0F9D58]/50 shadow-[0_0_15px_rgba(15,157,88,0.3)]">
-                Execute Send <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      {/* 🔹 Membership CTA (Join) */}
-      <section id="join" className="py-32 bg-[#0E1117] relative border-t border-white/5 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(15,157,88,0.1)_0%,transparent_100%)] pointer-events-none" />
-        <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-[#E6EDF3] mb-4">
-              Join the Engineering <span className="text-[#0F9D58]">Network</span>
-            </h2>
-            <p className="text-[#8B949E] font-mono text-sm max-w-xl mx-auto">Select your access level and initialize your journey.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-center">
-            {/* Explorer */}
-            <div className="bg-[#161B22]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col items-center text-center transition-transform hover:scale-105">
-              <h3 className="text-xl font-heading font-bold text-[#E6EDF3] mb-2">Explorer</h3>
-              <p className="text-[#8B949E] font-mono text-xs mb-8">Lvl 1 - Beginner Access</p>
-              <ul className="space-y-3 mb-8 text-sm text-[#8B949E] text-left w-full">
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0F9D58]" /> Campus Workshops</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0F9D58]" /> Community Discord</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0F9D58]" /> Coding Resources</li>
-              </ul>
-              <button className="w-full py-3 rounded-xl border border-[#0F9D58]/30 text-[#E6EDF3] font-mono font-bold hover:bg-[#0F9D58]/10 transition-colors">
-                Initialize
-              </button>
-            </div>
-
-            {/* Builder (Highlighted) */}
-            <div className="bg-gradient-to-b from-[#0F9D58] to-[#0c8a4d] rounded-3xl p-8 flex flex-col items-center text-center transform md:scale-110 shadow-[0_0_40px_rgba(15,157,88,0.3)] relative overflow-hidden z-20 border border-[#B6F000]/30 transition-transform hover:scale-110 md:hover:scale-110 group cursor-pointer">
-              <div className="absolute top-0 right-0 bg-[#B6F000] text-[#0E1117] text-[10px] font-bold px-3 py-1 rounded-bl-lg font-mono tracking-wider">RECOMMENDED</div>
-              <h3 className="text-2xl font-heading font-bold text-white mb-2 mt-2 group-hover:drop-shadow-lg transition-all">Builder</h3>
-              <p className="text-white/80 font-mono text-xs mb-8">Lvl 2 - Active Member Access</p>
-              <ul className="space-y-3 mb-8 text-sm text-white/90 text-left w-full">
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#B6F000]" /> Hackathon Teams</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#B6F000]" /> Open Source Projects</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#B6F000]" /> Mentorship Mux</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#B6F000]" /> Priority Event Reg</li>
-              </ul>
-              <button className="relative group/btn w-full overflow-hidden rounded-xl bg-[#B6F000] px-4 py-3 text-[#0E1117] font-mono font-bold transition-transform hover:scale-105 shadow-[0_0_15px_rgba(182,240,0,0.5)]">
-                <div className="absolute inset-0 bg-white/30 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out" />
-                <span className="relative z-10 flex justify-center items-center gap-2">Request Upgrade <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" /></span>
-              </button>
-            </div>
-
-            {/* Elite */}
-            <div className="bg-[#161B22]/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 flex flex-col items-center text-center transition-transform hover:scale-105">
-              <h3 className="text-xl font-heading font-bold text-[#E6EDF3] mb-2">Elite</h3>
-              <p className="text-[#8B949E] font-mono text-xs mb-8">Lvl 3 - Core Team Access</p>
-              <ul className="space-y-3 mb-8 text-sm text-[#8B949E] text-left w-full">
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0F9D58]" /> Admin Privileges</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0F9D58]" /> Global GFG Network</li>
-                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-[#0F9D58]" /> Event Organization</li>
-              </ul>
-              <button className="w-full py-3 rounded-xl border border-white/10 text-[#8B949E] font-mono font-bold hover:bg-white/5 transition-colors hover:text-white">
-                Apply for Core
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
 
     </Layout>
   );

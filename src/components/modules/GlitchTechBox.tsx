@@ -34,7 +34,7 @@ export default function GlitchTechBox() {
     }, []);
 
     return (
-        <div className="relative w-full h-[400px] bg-[#020617]/90 backdrop-blur-2xl rounded-3xl overflow-hidden border border-white/5 p-8 flex flex-col items-center justify-center group shadow-[0_0_50px_rgba(0,255,156,0.05)]">
+        <div className="relative w-full h-full min-h-[300px] bg-[rgba(10,15,30,0.55)] backdrop-blur-[20px] rounded-[28px] overflow-hidden border border-white/5 p-[28px] flex flex-col items-center justify-center group shadow-[0_10px_40px_rgba(0,0,0,0.35)]">
 
             {/* HUD Overlay Elements */}
             <div className="absolute top-4 left-6 flex gap-1 items-center font-mono text-[8px] text-[#00FF9C]/60 uppercase tracking-widest">

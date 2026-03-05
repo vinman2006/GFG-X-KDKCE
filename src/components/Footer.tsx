@@ -10,14 +10,16 @@ const Footer = () => {
           {/* About Chapter */}
           <div className="space-y-6">
             <div className="flex items-center space-x-3">
-              <img
-                src="/gfg-kdkce.png"
-                alt="GFG KDKCE Logo"
-                className="w-12 h-12 rounded-lg object-contain bg-white/5 p-1"
-              />
-              <div>
-                <span className="text-xl font-heading font-bold text-white block">GeeksForGeeks</span>
-                <span className="text-sm font-medium text-[#0F9D58]">Student Chapter</span>
+              <div className="flex items-center">
+                <img
+                  src="/gfg-kdkce.png"
+                  alt="GFG Logo"
+                  className="h-10 lg:h-12 w-auto object-contain"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xl font-heading font-bold text-white block leading-none">GEEKSFORGEEKS</span>
+                <span className="text-sm font-bold text-[#0F9D58] leading-none mt-1">KDKCE</span>
               </div>
             </div>
             <p className="text-gray-400 font-sans leading-relaxed">
@@ -48,7 +50,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-3 text-gray-400">
                 <Mail className="w-5 h-5 text-[#0F9D58] shrink-0" />
-                <a href="mailto:gfg@kdkce.edu.in" className="hover:text-[#0F9D58] transition-colors">gfg@kdkce.edu.in</a>
+                <a href="mailto:geekforgeekkdkce@gmail.com" className="hover:text-[#0F9D58] transition-colors">geekforgeekkdkce@gmail.com</a>
               </li>
             </ul>
 
@@ -77,9 +79,6 @@ const Footer = () => {
           <p className="text-sm text-gray-500">
             &copy; {new Date().getFullYear()} GeeksForGeeks KDKCE. All rights reserved.
           </p>
-          <div className="flex bg-white/5 rounded-full px-4 py-2 border border-white/10 shadow-inner">
-            <VisitorCounter />
-          </div>
         </div>
       </div>
     </footer>

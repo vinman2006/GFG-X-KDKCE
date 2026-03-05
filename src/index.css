@@ -8,6 +8,27 @@
 
 @layer base {
 
+  /* Global Designer Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0E1117;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #0F9D58;
+    border: 3px solid #0E1117;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #0F9D58;
+    box-shadow: 0 0 10px rgba(15, 157, 88, 0.5);
+  }
+
   :root,
   .dark {
     /* Cyberpunk Interface Color System */

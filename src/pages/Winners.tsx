@@ -137,7 +137,7 @@ const Winners = () => {
                         <Trophy className="w-6 h-6 text-white" />
                       </div>
                       <h3 className="text-lg font-bold text-green-700">{winner.position}</h3>
-                      <p className="font-semibold">{winner.team}</p>
+                      <p className="font-bold text-green-900 drop-shadow-sm">{winner.team}</p>
                     </div>
                   </div>
                 ))}
@@ -173,7 +173,7 @@ const Winners = () => {
                           <Trophy className="w-6 h-6 text-white" />
                         </div>
                         <h3 className="text-lg font-bold text-green-700">{winner.position}</h3>
-                        <p className="font-semibold">{winner.team}</p>
+                        <p className="font-bold text-green-900 drop-shadow-sm">{winner.team}</p>
                       </div>
                     </div>
                   ))}

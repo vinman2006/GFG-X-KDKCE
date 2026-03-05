@@ -32,12 +32,16 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 rounded-lg bg-[#0E1117] border border-[#0F9D58]/30 flex items-center justify-center font-mono font-bold text-[#E6EDF3] shadow-[0_0_15px_rgba(15,157,88,0.2)] group-hover:border-[#0F9D58] group-hover:shadow-[0_0_25px_rgba(15,157,88,0.4)] transition-all duration-300">
-              &lt;/&gt;
+            <div className="flex items-center">
+              <img
+                src="/gfg-kdkce.png"
+                alt="GFG Logo"
+                className="h-8 md:h-10 lg:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              />
             </div>
-            <div className="hidden sm:flex flex-col">
-              <span className="text-base font-heading font-extrabold tracking-tight text-[#E6EDF3] uppercase">GeeksForGeeks</span>
-              <span className="text-[10px] font-mono text-[#0F9D58] leading-none uppercase tracking-wider">KDKCE Chapter</span>
+            <div className="flex flex-col">
+              <span className="text-base font-heading font-extrabold tracking-tight text-[#E6EDF3] uppercase leading-none">GeeksForGeeks</span>
+              <span className="text-[10px] font-mono text-[#0F9D58] font-bold leading-none uppercase tracking-wider mt-0.5">KDKCE</span>
             </div>
           </Link>
 
@@ -58,12 +62,12 @@ const Navigation = () => {
           </div>
 
           <div className="hidden md:flex items-center">
-            <a href="#join" className="group relative overflow-hidden rounded-full bg-[#0E1117] border border-[#0F9D58]/30 px-6 py-2.5 text-sm font-mono font-bold text-[#E6EDF3] transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(15,157,88,0.3)] hover:border-[#0F9D58]">
+            <Link to="/contact#join" className="group relative overflow-hidden rounded-full bg-[#0E1117] border border-[#0F9D58]/30 px-6 py-2.5 text-sm font-mono font-bold text-[#E6EDF3] transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(15,157,88,0.3)] hover:border-[#0F9D58]">
               <div className="absolute inset-0 bg-gradient-to-r from-[#0F9D58] to-[#B6F000] opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
               <span className="relative z-10 flex items-center gap-2">
                 Join Chapter <span className="text-[#B6F000] transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
               </span>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -100,13 +104,13 @@ const Navigation = () => {
                 {item.name}
               </Link>
             ))}
-            <a
-              href="#join"
+            <Link
+              to="/contact#join"
               onClick={() => setIsOpen(false)}
               className="mt-4 block w-full text-center rounded-xl bg-gradient-to-r from-[#0F9D58]/20 to-[#B6F000]/10 border border-[#0F9D58]/40 px-4 py-3 text-sm font-mono font-bold text-[#B6F000]"
             >
               Join Chapter
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>

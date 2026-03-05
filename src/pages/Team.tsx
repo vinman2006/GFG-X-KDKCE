@@ -1,189 +1,94 @@
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
+import { Linkedin, Github } from "lucide-react";
 
 const teamMembers = [
-  { name: "Aparna Badhe", role: "Chairperson", image: "/ap.png" },
-  { name: "Aditi Badhe", role: "Vice Chairperson", image: "/ad.png" },
-  { name: "Rasika Pande", role: "Technical Head", image: "/image.png" },
-  { name: "Khushi Bodakhe", role: "Event Head", image: "/ks.jpg" },
-  { name: "Sakshi Wagh", role: "Design & Creative Head", image: "/sk.png" },
-  { name: "Anisha Gurumukhi", role: "PR & Outreach Head", image: "/ag.jpg" },
-  { name: "Harshit Pachbudhe", role: "Marketing Head", image: "/hs.jpg" },
-  { name: "Himanshu Kamble", role: "Social Media Head", image: "/hm.png" },
-];
-
-const facultyAdvisors = [
-  { name: "Dr. V. P. Varghese", role: "Principal, KDKCE", image: "/principal.jpg" },
-  { name: "Dr. A. M. Badar", role: "Vice-Principal, KDKCE", image: "/v-principal.png" },
-
-  { name: "Dr. A. A. Jaiswal", role: "HOD, CSE Dept", image: "/hod.jpg" },
-  { name: "Prof. A. M. Kuthe", role: "Faculty Advisor, CSE Dept", image: "/advisor-f.jpg" },
-
+  { name: "A. Badhe", role: "Chairperson", type: "Core Lead", image: "/ap.png" },
+  { name: "Dr. Varghese", role: "Principal", type: "Faculty", image: "/principal.jpg" },
+  { name: "R. Pande", role: "Technical Head", type: "Tech Team", image: "/image.png" },
+  { name: "S. Wagh", role: "Design Head", type: "Tech Team", image: "/sk.png" },
+  { name: "Aditi Badhe", role: "Vice Chairperson", type: "Core Lead", image: "/ad.png" },
+  { name: "Khushi Bodakhe", role: "Event Head", type: "Core Lead", image: "/ks.jpg" },
+  { name: "Anisha Gurumukhi", role: "PR & Outreach Head", type: "Tech Team", image: "/ag.jpg" },
+  { name: "Harshit Pachbudhe", role: "Marketing Head", type: "Tech Team", image: "/hs.jpg" },
 ];
 
 const TeamPage = () => {
   return (
     <Layout>
+      <div className="bg-[#0E1117] pt-32 pb-24 min-h-screen">
+        <section className="relative px-6 lg:px-12">
+          <div className="container mx-auto">
+            <div className="mb-16">
+              <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-[#E6EDF3] mb-4">
+                The <span className="text-[#0F9D58]">Core System</span>
+              </h2>
+              <p className="text-[#8B949E] font-mono text-sm max-w-xl border-l-2 border-[#B6F000] pl-4">
+                Authorized personnel. Root access granted.
+              </p>
+            </div>
 
-    <section className="min-h-screen bg-gradient-to-b from-white to-green-50 py-16 px-6">
-
-      <div className="container mx-auto text-center">
-        {/* Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-green-700 mb-12"
-        >
-          GeeksForGeeks KDKCE Team
-        </motion.h2>
-
-        {/* Faculty Advisors */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold mb-8 text-green-600">The Driving Force Behind Our Success - Our Advisory Faculty</h3>
-          <div className="flex justify-center gap-10 flex-wrap">
-            {facultyAdvisors.map((fa, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-xl shadow-lg overflow-hidden w-60 transition-transform hover:scale-105"
-              >
-                <div className="aspect-square w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 group/grid">
+              {teamMembers.map((member, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  whileHover={{ rotateX: 5, rotateY: -5, scale: 1.02 }}
+                  className="group relative bg-[#161B22]/50 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:border-[#0F9D58] hover:shadow-[0_0_30px_rgba(15,157,88,0.2)]"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E1117] via-[#0E1117]/50 to-transparent z-10" />
                   <img
-                    src={fa.image}
-                    alt={fa.name}
-                    className="w-full h-full object-cover"
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-80 object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-500 opacity-60 group-hover:opacity-100"
                   />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold text-gray-900">{fa.name}</h3>
-                  <p className="text-sm text-gray-600">{fa.role}</p>
-                </div>
-              </div>
-            ))}
+
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-[#0E1117] to-transparent">
+                    <span className="text-[10px] font-mono text-[#B6F000] uppercase tracking-wider mb-2 block">
+                      {member.type}
+                    </span>
+                    <h3 className="text-xl font-heading font-bold text-[#E6EDF3]">
+                      {member.name}
+                    </h3>
+                    <p className="text-[#8B949E] text-sm font-mono mb-2">
+                      {member.role}
+                    </p>
+
+                    {/* Social Icons Slide Up */}
+                    <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 h-0 group-hover:h-auto overflow-hidden">
+                      <a
+                        href="#"
+                        className="text-white hover:text-[#0F9D58] transition-colors"
+                      >
+                        <Linkedin className="w-5 h-5" />
+                      </a>
+                      <a
+                        href="#"
+                        className="text-white hover:text-[#0F9D58] transition-colors"
+                      >
+                        <Github className="w-5 h-5" />
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mt-24 text-center">
+              <h3 className="text-2xl font-mono text-[#8B949E] opacity-40">
+                More Members Coming Soon...
+              </h3>
+            </div>
           </div>
-        </div>
-
-        {/* Core Committee */}
-        <h3 className="text-2xl font-semibold mb-8 text-green-600">Core Committee</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {teamMembers.map((member, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: idx * 0.05 }}
-              className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105"
-            >
-              <div className="aspect-square w-full">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-900">{member.name}</h3>
-                <p className="text-sm text-gray-600">{member.role}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-        <br/>
-        <br/>
-        <br/>
-        <h6 className="text-2xl font-semibold mb-8 text-black-600">More Members Coming Soon..</h6>
-
+        </section>
       </div>
-    </section>
-      </Layout>
-
+    </Layout>
   );
 };
 
 export default TeamPage;
-// import { motion } from "framer-motion";
-// import Layout from "@/components/Layout";
-
-// const teamMembers = [
-//   { name: "Aparna Badhe", role: "Chairperson", image: "/ap.jpg" },
-//   { name: "Bob", role: "Vice President", image: "/team/bob.jpg" },
-//   { name: "Charlie", role: "Secretary", image: "/team/charlie.jpg" },
-//   { name: "David", role: "Technical Lead", image: "/team/david.jpg" },
-//   { name: "Eva", role: "PR Head", image: "/team/eva.jpg" },
-//   { name: "Frank", role: "Design Lead", image: "/team/frank.jpg" },
-//   { name: "Grace", role: "Event Manager", image: "/team/grace.jpg" },
-//   { name: "Hank", role: "Treasurer", image: "/team/hank.jpg" },
-// ];
-
-// const facultyAdvisors = [
-//   { name: "Dr. Advisor One", role: "Faculty Advisor", image: "/team/faculty1.jpg" },
-//   { name: "Dr. Advisor Two", role: "Faculty Advisor", image: "/team/faculty2.jpg" },
-// ];
-
-// const TeamPage = () => {
-//   return (
-//     <Layout>
-
-//     <section className="min-h-screen bg-gradient-to-b from-white to-green-50 py-16 px-6">
-//       <div className="container mx-auto text-center">
-//         {/* Title */}
-//         <motion.h2
-//           initial={{ opacity: 0, y: -20 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           transition={{ duration: 0.6 }}
-//           className="text-4xl md:text-5xl font-bold text-green-700 mb-12"
-//         >
-//           Meet Our Team 🚀
-//         </motion.h2>
-
-//         {/* Faculty Advisors */}
-//         <div className="mb-16">
-//           <h3 className="text-2xl font-semibold mb-8 text-green-600">Faculty Advisors</h3>
-//           <div className="flex justify-center gap-12 flex-wrap">
-//             {facultyAdvisors.map((fa, idx) => (
-//               <div
-//                 key={idx}
-//                 className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center w-64 transition-transform hover:scale-105"
-//               >
-//                 <img
-//                   src={fa.image}
-//                   alt={fa.name}
-//                   className="w-28 h-28 rounded-full object-cover mb-4 border-4 border-green-500/40"
-//                 />
-//                 <h3 className="text-lg font-semibold text-gray-900">{fa.name}</h3>
-//                 <p className="text-sm text-gray-600">{fa.role}</p>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-
-//         {/* Core Committee */}
-//         <h3 className="text-2xl font-semibold mb-8 text-green-600">Core Committee</h3>
-//         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-//           {teamMembers.map((member, idx) => (
-//             <motion.div
-//               key={idx}
-//               initial={{ opacity: 0, y: 30 }}
-//               animate={{ opacity: 1, y: 0 }}
-//               transition={{ duration: 0.6, delay: idx * 0.1 }}
-//               className="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transition-transform hover:scale-105"
-//             >
-//               <img
-//                 src={member.image}
-//                 alt={member.name}
-//                 className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-green-400/30"
-//               />
-//               <h3 className="text-lg font-semibold text-gray-900">{member.name}</h3>
-//               <p className="text-sm text-gray-600">{member.role}</p>
-//             </motion.div>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//     </Layout>
-
-//   );
-// };
-
-// export default TeamPage;
 
