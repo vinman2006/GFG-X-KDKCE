@@ -34,8 +34,8 @@ const Contact = () => {
     {
       icon: Instagram,
       name: "Instagram",
-      handle: "@geeksforgeeks_kdkce",
-      link: "https://www.instagram.com/geeksforgeeks_kdkce?igsh=a241bGJ3anM3ZXhr",
+      handle: "@gfgkdkce",
+      link: "https://www.instagram.com/gfgkdkce?igsh=bWZyY3pmcWxlaWp5",
       color: "hover:bg-pink-500"
     },
     {

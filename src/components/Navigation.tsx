@@ -27,21 +27,30 @@ const Navigation = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className={`fixed top-4 left-4 right-4 z-50 transition-all duration-500 max-w-6xl mx-auto rounded-full ${scrolled ? 'bg-[#0E1117]/60 backdrop-blur-xl border border-white/10 shadow-[0_0_20px_rgba(15,157,88,0.15)] py-2' : 'bg-transparent border-transparent py-4'}`}>
+    <nav className={`fixed top-4 left-4 right-4 z-50 transition-all duration-500 max-w-6xl mx-auto rounded-full bg-[#0E1117]/60 backdrop-blur-xl border border-white/10 shadow-[0_0_20px_rgba(15,157,88,0.15)] ${scrolled ? 'py-2' : 'py-3'}`}>
       <div className="container mx-auto px-4 lg:px-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
-            <div className="flex items-center">
+          <Link
+            to="/"
+            className="flex items-center gap-3 pl-6 group transition-all duration-300"
+          >
+            <div className="flex items-center justify-center relative">
+              {/* Subtle hover glow behind logo icon */}
+              <div className="absolute inset-0 bg-[#0F9D58] blur-[15px] opacity-0 group-hover:opacity-30 transition-opacity duration-300 rounded-full" />
               <img
-                src="/gfg-kdkce.png"
+                src="/gfg-kdkce.svg"
                 alt="GFG Logo"
-                className="h-8 md:h-10 lg:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-[34px] w-auto object-contain relative z-10 transition-transform duration-300 group-hover:scale-105 group-hover:brightness-110"
               />
             </div>
-            <div className="flex flex-col">
-              <span className="text-base font-heading font-extrabold tracking-tight text-[#E6EDF3] uppercase leading-none">GeeksForGeeks</span>
-              <span className="text-[10px] font-mono text-[#0F9D58] font-bold leading-none uppercase tracking-wider mt-0.5">KDKCE</span>
+            <div className="flex flex-col justify-center translate-y-[1px]">
+              <span className="text-[16px] font-sans font-semibold tracking-tight text-[#E6EDF3] uppercase leading-none group-hover:text-white transition-colors duration-300">
+                GEEKSFORGEEKS
+              </span>
+              <span className="text-[11px] font-sans font-medium text-[#0F9D58] opacity-70 uppercase tracking-[0.2em] leading-none mt-1 group-hover:opacity-100 transition-opacity duration-300">
+                KDKCE
+              </span>
             </div>
           </Link>
 
@@ -51,7 +60,7 @@ const Navigation = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`relative px-4 py-2 text-sm font-mono tracking-tight transition-all duration-300 rounded-full ${isActive(item.path)
+                className={`relative px-4 py-2 text-sm font-sans tracking-tight transition-all duration-300 rounded-full ${isActive(item.path)
                   ? "text-[#E6EDF3] bg-white/10 border border-white/5"
                   : "text-[#8B949E] hover:text-[#E6EDF3] hover:bg-white/5 border border-transparent"
                   }`}
@@ -62,7 +71,7 @@ const Navigation = () => {
           </div>
 
           <div className="hidden md:flex items-center">
-            <Link to="/contact#join" className="group relative overflow-hidden rounded-full bg-[#0E1117] border border-[#0F9D58]/30 px-6 py-2.5 text-sm font-mono font-bold text-[#E6EDF3] transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(15,157,88,0.3)] hover:border-[#0F9D58]">
+            <Link to="/contact#join" className="group relative overflow-hidden rounded-full bg-[#0E1117] border border-[#0F9D58]/30 px-6 py-2.5 text-sm font-sans font-bold text-[#E6EDF3] transition-all hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(15,157,88,0.3)] hover:border-[#0F9D58]">
               <div className="absolute inset-0 bg-gradient-to-r from-[#0F9D58] to-[#B6F000] opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
               <span className="relative z-10 flex items-center gap-2">
                 Join Chapter <span className="text-[#B6F000] transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
@@ -96,7 +105,7 @@ const Navigation = () => {
                 key={item.path}
                 to={item.path}
                 onClick={() => setIsOpen(false)}
-                className={`block px-4 py-3 text-sm font-mono rounded-xl transition-all ${isActive(item.path)
+                className={`block px-4 py-3 text-sm font-sans rounded-xl transition-all ${isActive(item.path)
                   ? "bg-[#0F9D58]/10 text-[#0F9D58] border border-[#0F9D58]/20"
                   : "text-[#8B949E] hover:text-[#E6EDF3] hover:bg-white/5"
                   }`}
@@ -107,7 +116,7 @@ const Navigation = () => {
             <Link
               to="/contact#join"
               onClick={() => setIsOpen(false)}
-              className="mt-4 block w-full text-center rounded-xl bg-gradient-to-r from-[#0F9D58]/20 to-[#B6F000]/10 border border-[#0F9D58]/40 px-4 py-3 text-sm font-mono font-bold text-[#B6F000]"
+              className="mt-4 block w-full text-center rounded-xl bg-gradient-to-r from-[#0F9D58]/20 to-[#B6F000]/10 border border-[#0F9D58]/40 px-4 py-3 text-sm font-sans font-bold text-[#B6F000]"
             >
               Join Chapter
             </Link>

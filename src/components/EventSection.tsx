@@ -47,10 +47,10 @@ export default function EventSection() {
         <section id="events" className="py-24 bg-[#0E1117] relative overflow-hidden border-t border-white/5">
             <div className="container mx-auto px-6 lg:px-12 relative z-10">
                 <div className="mb-16">
-                    <h2 className="text-3xl md:text-5xl font-heading font-extrabold text-[#E6EDF3] mb-4">
-                        Upcoming <span className="text-[#0F9D58] font-mono italic font-normal tracking-tight">Events</span>
+                    <h2 className="text-3xl md:text-5xl font-sans font-extrabold text-[#E6EDF3] mb-4">
+                        Upcoming <span className="text-[#0F9D58] font-sans italic font-normal tracking-tight">Events</span>
                     </h2>
-                    <p className="text-[#8B949E] font-mono text-sm max-w-xl border-l-2 border-[#B6F000] pl-4">
+                    <p className="text-[#8B949E] font-sans text-sm max-w-xl border-l-2 border-[#B6F000] pl-4">
                         Join our technical sessions and build real-world applications.
                         <br />Status: Registration Open.
                     </p>
@@ -73,15 +73,15 @@ export default function EventSection() {
 
                         <div className="relative z-10 flex-1">
                             <div className="flex flex-wrap items-center gap-3 mb-4">
-                                <span className="px-3 py-1 rounded-full bg-[#0F9D58]/20 border border-[#0F9D58]/30 text-[#0F9D58] font-mono text-[10px] tracking-widest uppercase">
+                                <span className="px-3 py-1 rounded-full bg-[#0F9D58]/20 border border-[#0F9D58]/30 text-[#0F9D58] font-sans text-[10px] tracking-widest uppercase">
                                     WORKSHOP // 2026
                                 </span>
-                                <span className="text-[#8B949E] font-mono text-[10px] tracking-widest uppercase">
+                                <span className="text-[#8B949E] font-sans text-[10px] tracking-widest uppercase">
                                     {awsEvent.organizer}
                                 </span>
                             </div>
 
-                            <h3 className="text-3xl md:text-4xl font-heading font-black text-white mb-3 tracking-tighter group-hover:text-[#0F9D58] transition-colors">
+                            <h3 className="text-3xl md:text-4xl font-sans font-black text-white mb-3 tracking-tighter group-hover:text-[#0F9D58] transition-colors">
                                 FROM LOCAL CODE TO LIVE URL
                             </h3>
                             <p className="text-[#8B949E] mb-8 line-clamp-2 text-sm leading-relaxed">
@@ -89,15 +89,15 @@ export default function EventSection() {
                             </p>
 
                             <div className="flex flex-wrap items-center gap-6">
-                                <div className="flex items-center gap-2 text-[#E6EDF3]/80 font-mono text-[10px]">
+                                <div className="flex items-center gap-2 text-[#E6EDF3]/80 font-sans text-[10px]">
                                     <MapPin className="w-4 h-4 text-[#0F9D58]" />
                                     <span>{awsEvent.venue}</span>
                                 </div>
-                                <div className="flex items-center gap-2 text-[#E6EDF3]/80 font-mono text-[10px]">
+                                <div className="flex items-center gap-2 text-[#E6EDF3]/80 font-sans text-[10px]">
                                     <Calendar className="w-4 h-4 text-[#0F9D58]" />
                                     <span>{awsEvent.date}</span>
                                 </div>
-                                <div className="flex items-center gap-2 text-[#E6EDF3]/80 font-mono text-[10px]">
+                                <div className="flex items-center gap-2 text-[#E6EDF3]/80 font-sans text-[10px]">
                                     <Laptop className="w-4 h-4 text-[#0F9D58]" />
                                     <span>{awsEvent.mode}</span>
                                 </div>
@@ -105,7 +105,7 @@ export default function EventSection() {
                         </div>
 
                         <div className="relative z-10 flex flex-col items-center justify-center bg-white/5 border border-white/10 rounded-2xl p-6 min-w-[160px]">
-                            <span className="text-[10px] font-mono text-[#0F9D58] mb-2 animate-pulse">● LIVE NOW</span>
+                            <span className="text-[10px] font-sans text-[#0F9D58] mb-2 animate-pulse">● LIVE NOW</span>
                             <span className="text-white font-bold text-sm">Registration Open</span>
                             <ChevronRight className="w-5 h-5 text-[#0F9D58] mt-4 group-hover:translate-x-2 transition-transform" />
                         </div>
@@ -117,7 +117,7 @@ export default function EventSection() {
                             <div className="absolute inset-0 bg-gradient-to-br from-[#B6F000]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                             <h4 className="text-lg font-bold text-white mb-2 relative z-10">Want to host an event?</h4>
                             <p className="text-sm text-[#8B949E] mb-6 relative z-10 leading-relaxed">Collaborate with our technical team to bring your ideas to life. We support community building through workshops and tech talks.</p>
-                            <a href="/contact" className="inline-flex items-center text-[#0F9D58] hover:text-[#B6F000] font-mono text-sm transition-colors relative z-10">
+                            <a href="/contact" className="inline-flex items-center text-[#0F9D58] hover:text-[#B6F000] font-sans text-sm transition-colors relative z-10">
                                 Get in touch <ChevronRight className="w-4 h-4 ml-1" />
                             </a>
                         </div>
@@ -125,7 +125,7 @@ export default function EventSection() {
                         <div className="p-8 bg-[rgba(10,15,30,0.55)] backdrop-blur-[20px] rounded-[28px] border border-white/5 flex items-center justify-between opacity-60">
                             <div>
                                 <h4 className="text-white font-bold mb-1">Stay Notified</h4>
-                                <p className="text-[10px] font-mono text-[#8B949E] uppercase tracking-wider">Join our announcement channel</p>
+                                <p className="text-[10px] font-sans text-[#8B949E] uppercase tracking-wider">Join our announcement channel</p>
                             </div>
                             <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center bg-white/5">
                                 <Send className="w-5 h-5 text-[#E6EDF3]" />
@@ -167,8 +167,8 @@ export default function EventSection() {
                                             <TrendingUp className="w-8 h-8 text-[#0F9D58]" />
                                         </div>
                                         <div>
-                                            <span className="text-[#0F9D58] font-mono text-xs tracking-widest uppercase mb-1 block">AWS Learn & Build</span>
-                                            <h2 className="text-3xl md:text-5xl font-heading font-black text-white tracking-tighter leading-none">
+                                            <span className="text-[#0F9D58] font-sans text-xs tracking-widest uppercase mb-1 block">AWS Learn & Build</span>
+                                            <h2 className="text-3xl md:text-5xl font-sans font-black text-white tracking-tighter leading-none">
                                                 {selectedEvent.organizer}
                                             </h2>
                                         </div>
@@ -187,7 +187,7 @@ export default function EventSection() {
 
                                         <div className="space-y-8">
                                             <div className="p-6 bg-white/5 rounded-3xl border border-white/10">
-                                                <h4 className="text-[10px] font-mono text-[#8B949E] uppercase tracking-widest mb-4">Event Logistics</h4>
+                                                <h4 className="text-[10px] font-sans text-[#8B949E] uppercase tracking-widest mb-4">Event Logistics</h4>
                                                 <div className="space-y-4">
                                                     <div className="flex items-center gap-4">
                                                         <MapPin className="w-5 h-5 text-[#0F9D58]" />
@@ -207,7 +207,7 @@ export default function EventSection() {
                                             </div>
 
                                             <div className="p-6 bg-[#0F9D58]/5 rounded-3xl border border-[#0F9D58]/20">
-                                                <h4 className="text-[10px] font-mono text-[#0F9D58] uppercase tracking-widest mb-4">What You'll Get</h4>
+                                                <h4 className="text-[10px] font-sans text-[#0F9D58] uppercase tracking-widest mb-4">What You'll Get</h4>
                                                 <ul className="space-y-2">
                                                     {selectedEvent.perks.map((perk, i) => (
                                                         <li key={i} className="flex items-center gap-3 text-[#E6EDF3] text-sm">
@@ -241,7 +241,7 @@ export default function EventSection() {
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-white/5">
                                         <div className="p-6 bg-yellow-500/5 border border-yellow-500/20 rounded-3xl">
-                                            <h4 className="text-[10px] font-mono text-yellow-500 uppercase tracking-widest mb-3">Registration Note</h4>
+                                            <h4 className="text-[10px] font-sans text-yellow-500 uppercase tracking-widest mb-3">Registration Note</h4>
                                             <ul className="text-xs text-[#8B949E] space-y-1">
                                                 <li>• Seats are limited.</li>
                                                 <li>• Prior registration is mandatory.</li>
@@ -249,12 +249,12 @@ export default function EventSection() {
                                             </ul>
                                         </div>
                                         <div className="p-6 bg-white/5 border border-white/10 rounded-3xl">
-                                            <h4 className="text-[10px] font-mono text-[#8B949E] uppercase tracking-widest mb-3">Enquiry Contacts</h4>
+                                            <h4 className="text-[10px] font-sans text-[#8B949E] uppercase tracking-widest mb-3">Enquiry Contacts</h4>
                                             <div className="space-y-2">
                                                 {selectedEvent.contacts.map((contact, i) => (
                                                     <div key={i} className="flex justify-between text-xs">
                                                         <span className="text-white font-medium">{contact.name}</span>
-                                                        <span className="text-[#8B949E] font-mono">{contact.phone}</span>
+                                                        <span className="text-[#8B949E] font-sans">{contact.phone}</span>
                                                     </div>
                                                 ))}
                                             </div>

@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="flex items-center space-x-3">
               <div className="flex items-center">
                 <img
-                  src="/gfg-kdkce.png"
+                  src="/gfg-kdkce.svg"
                   alt="GFG Logo"
                   className="h-10 lg:h-12 w-auto object-contain"
                 />
@@ -56,7 +56,7 @@ const Footer = () => {
 
             <div className="flex space-x-4 pt-2">
               <a
-                href="https://www.instagram.com/geeksforgeeks_kdkce?igsh=a241bGJ3anM3ZXhr"
+                href="https://www.instagram.com/gfgkdkce?igsh=bWZyY3pmcWxlaWp5"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded bg-white/5 flex items-center justify-center hover:bg-[#0F9D58] hover:text-white transition-all duration-300"

@@ -52,7 +52,7 @@ export default function OrbitingNodesBox() {
                 >
                     <div className="absolute inset-0 bg-[#0F9D58]/5 rounded-2xl animate-pulse" />
                     <img
-                        src="/gfg-kdkce.png"
+                        src="/gfg-kdkce.svg"
                         alt="GFG Logo"
                         className="w-14 h-14 object-contain relative z-10 p-1"
                     />
