@@ -95,11 +95,27 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, idx, isLead }) 
                     </p>
                 </div>
 
-                <div className="mt-4 flex gap-3 sm:gap-4 opacity-50 group-hover:opacity-100 transition-opacity duration-300">
-                    {member.linkedin && <Linkedin className="w-4 h-4 text-white hover:text-[#0A66C2] transition-colors" />}
-                    {member.github && <Github className="w-4 h-4 text-white hover:text-[#B6F000] transition-colors" />}
-                    {member.instagram && <Instagram className="w-4 h-4 text-white hover:text-[#E1306C] transition-colors" />}
-                    {member.portfolio && <Globe className="w-4 h-4 text-white hover:text-[#0F9D58] transition-colors" />}
+                <div className="mt-4 flex gap-3 sm:gap-4 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                    {member.linkedin && (
+                        <a href={member.linkedin} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                            <Linkedin className="w-4 h-4 text-white hover:text-[#0A66C2] transition-colors" />
+                        </a>
+                    )}
+                    {member.github && (
+                        <a href={member.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                            <Github className="w-4 h-4 text-white hover:text-[#B6F000] transition-colors" />
+                        </a>
+                    )}
+                    {member.instagram && (
+                        <a href={member.instagram} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                            <Instagram className="w-4 h-4 text-white hover:text-[#E1306C] transition-colors" />
+                        </a>
+                    )}
+                    {member.portfolio && (
+                        <a href={member.portfolio} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                            <Globe className="w-4 h-4 text-white hover:text-[#0F9D58] transition-colors" />
+                        </a>
+                    )}
                 </div>
             </motion.div>
 

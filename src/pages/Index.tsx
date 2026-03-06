@@ -29,6 +29,14 @@ const Index = () => {
   ];
 
   const [visibleTerminalLines, setVisibleTerminalLines] = useState<{ id: number; lineIdx: number }[]>([]);
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+    handleResize(); // Init on mount
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     let step = 0;
@@ -50,84 +58,108 @@ const Index = () => {
       <HeroSection />
       <CollegeSection />
 
+      <EventSection />
+
       {/* 🔹 Interactive Modules Section */}
       <section className="py-24 bg-gradient-to-br from-[#050B14] to-[#0B1220] relative overflow-hidden border-t border-white/5">
-        {/* Technical Grid Layer */}
-        <div
-          className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)`,
-            backgroundSize: '60px 60px',
-            maskImage: 'radial-gradient(circle at center, black, transparent 80%)',
-            WebkitMaskImage: 'radial-gradient(circle at center, black, transparent 80%)',
-          }}
-        />
 
-        {/* Noise / Grain Layer */}
-        <div className="absolute inset-0 z-[1] opacity-[0.03] mix-blend-overlay pointer-events-none">
-          <svg className="w-full h-full opacity-20">
-            <filter id="noiseFilter">
-              <feTurbulence
-                type="fractalNoise"
-                baseFrequency="0.65"
-                numOctaves="3"
-                stitchTiles="stitch"
-              />
-              <feColorMatrix type="saturate" values="0" />
-            </filter>
-            <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-          </svg>
-        </div>
+        {/* Desktop Version: Full Interactive Experience */}
+        {isDesktop ? (
+          <>
+            {/* Technical Grid Layer */}
+            <div
+              className="absolute inset-0 z-0 opacity-[0.15] pointer-events-none"
+              style={{
+                backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)`,
+                backgroundSize: '60px 60px',
+                maskImage: 'radial-gradient(circle at center, black, transparent 80%)',
+                WebkitMaskImage: 'radial-gradient(circle at center, black, transparent 80%)',
+              }}
+            />
 
-        <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-            {/* Left: Interactive Grid */}
-            <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
-              <ModuleInteractiveGrid />
+            {/* Noise / Grain Layer */}
+            <div className="absolute inset-0 z-[1] opacity-[0.03] mix-blend-overlay pointer-events-none">
+              <svg className="w-full h-full opacity-20">
+                <filter id="noiseFilter">
+                  <feTurbulence
+                    type="fractalNoise"
+                    baseFrequency="0.65"
+                    numOctaves="3"
+                    stitchTiles="stitch"
+                  />
+                  <feColorMatrix type="saturate" values="0" />
+                </filter>
+                <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+              </svg>
             </div>
 
-            {/* Right: Content & Dashboards */}
-            <div className="order-1 lg:order-2 flex flex-col justify-center h-full pt-8 lg:pt-16">
-              <div className="space-y-6">
-                <h2 className="text-4xl md:text-6xl font-sans font-extrabold text-[#E6EDF3] leading-[1.1]">
-                  Computational <br />
-                  <span className="text-[#7CFF4F] font-sans italic font-normal tracking-tight">Modules</span>
-                </h2>
-                <div className="max-w-xl p-4 border-l-2 border-[#7CFF4F] bg-white/[0.02] backdrop-blur-sm">
-                  <p className="text-[#8B949E] font-sans text-sm leading-relaxed">
-                    System architecture designed to output 10x engineering potential.
-                    Automated workflows, peer learning, and rapid deployment.
-                    <br />
-                    <span className="text-[#7CFF4F] font-mono text-[10px] mt-2 block opacity-80">STATUS: CORE_SYSTEM_ONLINE // V.2.5.0</span>
-                  </p>
-                </div>
-              </div>
+            <div className="container mx-auto px-6 lg:px-12 relative z-10">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-              {/* Terminal for Right Column */}
-              <div className="space-y-6 max-w-xl mt-8">
-                {/* Terminal Interface */}
-                <div className="bg-[rgba(10,15,30,0.55)] backdrop-blur-[20px] rounded-[24px] border border-white/5 p-6 h-[220px] overflow-hidden flex flex-col shadow-2xl">
-                  <div className="flex items-center justify-between mb-3 opacity-60">
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-2 h-2 rounded-full bg-[#FF3B3B]/50" />
-                      <div className="w-2 h-2 rounded-full bg-[#FFB600]/50" />
-                      <div className="w-2 h-2 rounded-full bg-[#7CFF4F]/50" />
+                {/* Left: Interactive Grid */}
+                <div className="order-2 lg:order-1 flex justify-center lg:justify-start">
+                  <ModuleInteractiveGrid />
+                </div>
+
+                {/* Right: Content & Dashboards */}
+                <div className="order-1 lg:order-2 flex flex-col justify-center h-full pt-8 lg:pt-16">
+                  <div className="space-y-6">
+                    <h2 className="text-4xl md:text-6xl font-sans font-extrabold text-[#E6EDF3] leading-[1.1]">
+                      Computational <br />
+                      <span className="text-[#7CFF4F] font-sans italic font-normal tracking-tight">Modules</span>
+                    </h2>
+                    <div className="max-w-xl p-4 border-l-2 border-[#7CFF4F] bg-white/[0.02] backdrop-blur-sm">
+                      <p className="text-[#8B949E] font-sans text-sm leading-relaxed">
+                        System architecture designed to output 10x engineering potential.
+                        Automated workflows, peer learning, and rapid deployment.
+                        <br />
+                        <span className="text-[#7CFF4F] font-mono text-[10px] mt-2 block opacity-80">STATUS: CORE_SYSTEM_ONLINE // V.2.5.0</span>
+                      </p>
                     </div>
-                    <span className="text-[9px] font-mono text-[#8B949E] uppercase tracking-widest">LIVE_SIGNAL</span>
                   </div>
-                  <div className="flex-1 space-y-1.5 font-mono text-[11px] custom-scrollbar overflow-y-auto">
-                    <AnimatePresence mode="popLayout">
-                      {visibleTerminalLines.map((item) => (
-                        <TerminalLine key={item.id} item={item} stats={terminalStats} />
-                      ))}
-                    </AnimatePresence>
+
+                  {/* Terminal for Right Column */}
+                  <div className="space-y-6 max-w-xl mt-8">
+                    {/* Terminal Interface */}
+                    <div className="bg-[rgba(10,15,30,0.55)] backdrop-blur-[20px] rounded-[24px] border border-white/5 p-6 h-[220px] overflow-hidden flex flex-col shadow-2xl">
+                      <div className="flex items-center justify-between mb-3 opacity-60">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-2 h-2 rounded-full bg-[#FF3B3B]/50" />
+                          <div className="w-2 h-2 rounded-full bg-[#FFB600]/50" />
+                          <div className="w-2 h-2 rounded-full bg-[#7CFF4F]/50" />
+                        </div>
+                        <span className="text-[9px] font-mono text-[#8B949E] uppercase tracking-widest">LIVE_SIGNAL</span>
+                      </div>
+                      <div className="flex-1 space-y-1.5 font-mono text-[11px] custom-scrollbar overflow-y-auto">
+                        <AnimatePresence mode="popLayout">
+                          {visibleTerminalLines.map((item) => (
+                            <TerminalLine key={item.id} item={item} stats={terminalStats} />
+                          ))}
+                        </AnimatePresence>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </>
+        ) : (
+          /* Mobile Version: Lightweight Static Layout */
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-4xl font-sans font-extrabold text-[#E6EDF3] leading-[1.1] mb-4">
+              Computational <br />
+              <span className="text-[#7CFF4F] font-sans italic font-normal tracking-tight">Modules</span>
+            </h2>
+            <div className="max-w-md mx-auto p-4 border-l-2 border-[#7CFF4F] bg-white/[0.02] text-left">
+              <p className="text-[#8B949E] font-sans text-sm leading-relaxed">
+                System architecture designed to output 10x engineering potential.
+                Automated workflows, peer learning, and rapid deployment.
+                <br />
+                <span className="text-[#7CFF4F] font-mono text-[10px] mt-2 block opacity-80">STATUS: CORE_SYSTEM_ONLINE // V.2.5.0</span>
+              </p>
             </div>
           </div>
-        </div>
+        )}
       </section>
 
       {/* 🔹 Manifesto Section */}
@@ -157,7 +189,7 @@ const Index = () => {
         </div>
       </section>
 
-      <EventSection />
+
 
       {/* 🔹 Event Glimpse Gallery (Replacing Hall of Fame) */}
       <section className="py-24 bg-[#0E1117] overflow-hidden">

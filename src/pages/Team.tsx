@@ -11,7 +11,7 @@ const newCommittee: TeamMember[] = newCommitteeData.map((member) => ({
   role: member.position || "Member",
   type: member.branch || "Member",
   image: `/team/new/${member.profile_photo}`,
-  linkedin: member.linkedin && member.linkedin !== "." && member.linkedin !== "Don't have" && member.linkedin !== "na" ? member.linkedin : null,
+  linkedin: member.full_name?.toLowerCase().includes("prince naware") ? "https://www.linkedin.com/in/princenaware/" : (member.linkedin && member.linkedin !== "." && member.linkedin !== "Don't have" && member.linkedin !== "na" ? member.linkedin : null),
   instagram: member.instagram && member.instagram !== "." && member.instagram !== "Don't have" && member.instagram !== "na" && member.instagram !== "None" ? member.instagram : null,
   github: member.github && member.github !== "." && member.github !== "Don't have" ? member.github : null,
   portfolio: member.portfolio && member.portfolio !== "." && member.portfolio !== "No" && member.portfolio !== "Comming Soon" ? member.portfolio : null,
@@ -63,11 +63,17 @@ const coreTeam = coreTeamNames.map(info => {
 });
 
 // Department definitions
-const departments = [
+type Department = {
+  name: string;
+  leadName?: string;
+  memberNames: (string | { name: string; role: string })[];
+};
+
+const departments: Department[] = [
   {
     name: "Event Team",
     leadName: "Khushi Suraj Prajapati",
-    memberNames: ["Sharwari Devhare", "Gauri Bandawar", "Samradnyee Dhanraj Raulkar", "Hamza Sayyed Riyaz Ali"]
+    memberNames: ["Sharwari Devhare", "Gauri Bandawar", "Samradnyee Dhanraj Raulkar", "Hamza Sayyed Riyaz Ali", "Yugank Bhende", "Hasnain Sheikh"]
   },
   {
     name: "Technical Team",
@@ -77,12 +83,15 @@ const departments = [
   {
     name: "Social Media Team",
     leadName: "Prince Naware",
-    memberNames: ["Shreyash Uday Chine", "Samyak Rahul Walde", "Anuj Rajendraprasad Vishwakarma", "Tushar Chhapekar", "Kritika Jethani"]
+    memberNames: [
+      { name: "Shreyash Uday Chine", role: "Social Media Co-Head" },
+      "Samyak Rahul Walde", "Anuj Rajendraprasad Vishwakarma", "Tushar Chhapekar", "Kritika Jethani"
+    ]
   },
   {
     name: "Marketing Team",
-    leadName: "none",
-    memberNames: ["Vikramaditya Kambani", "Sai Chopkar", "Shreya Vinod Wasnik"]
+    leadName: "Mayuri K. Thakur",
+    memberNames: ["Vikramaditya Kambani", "Sai Chopkar", "Mayur Pralhad Raut", "Shreya Vinod Wasnik"]
   },
   {
     name: "Design & Creative Team",
@@ -102,10 +111,16 @@ const TeamStructureBlock = ({ dept }: { dept: typeof departments[0] }) => {
   }) : null;
   const lead = isLeadValid ? (leadMatch ? { ...leadMatch, role: "Team Lead" } : { name: dept.leadName, role: "Team Lead", type: dept.name, image: "/placeholder.svg" }) : null;
 
-  const members = dept.memberNames.map(name => {
+  const members = dept.memberNames.map(item => {
+    const isString = typeof item === "string";
+    const name = isString ? item : item.name;
+    const customRole = isString ? undefined : item.role;
     const firstName = name.split(" ")[0].toLowerCase();
+
     const match = activeCommittee.find(m => m.fullName && (matchName(m.fullName, name) || m.fullName.toLowerCase().split(" ")[0] === firstName));
-    return match ? { ...match, role: `${dept.name.split(" ")[0]} Team Member` } : { name, role: `${dept.name.split(" ")[0]} Team Member`, type: dept.name, image: "/placeholder.svg", linkedin: null, github: null, instagram: null, portfolio: null };
+    const defaultRole = dept.name.replace(" Team", " Member").replace("Design & Creative Member", "Design & Creative Team Member"); // cleaner generic roles
+
+    return match ? { ...match, role: customRole || defaultRole } : { name, role: customRole || defaultRole, type: dept.name, image: "/placeholder.svg", linkedin: null, github: null, instagram: null, portfolio: null };
   });
 
   const allMembers = lead ? [lead, ...members] : members;
