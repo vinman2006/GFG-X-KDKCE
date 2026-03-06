@@ -60,44 +60,46 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, idx, isLead }) 
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ rotateX: 5, rotateY: -5, scale: 1.02, y: -6 }}
+                whileHover={{ y: -6 }}
                 onClick={() => setIsOpen(true)}
-                className={`group relative bg-[#161B22]/50 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:border-[#0F9D58] hover:shadow-[0_10px_30px_rgba(15,157,88,0.3)] flex flex-col justify-end ${isLead ? "h-[380px] hover:shadow-[0_10px_40px_rgba(15,157,88,0.5)] md:w-[320px] w-full" : "h-[320px]"}`}
-                style={{ transformStyle: "preserve-3d" }}
+                className="group relative bg-[#161B22]/50 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-[#0F9D58] hover:shadow-[0_0_20px_rgba(15,157,88,0.5)] flex flex-col items-center p-6 h-full w-full"
             >
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0E1117] via-[#0E1117]/50 to-transparent z-10" />
-                <img
-                    src={member.image}
-                    alt={member.name}
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                        (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3";
-                    }}
-                    className="absolute inset-0 w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-500 opacity-60 group-hover:opacity-100"
-                />
+                {/* Neon Glow Header */}
+                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#0F9D58] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                {/* CSS to remove inline grayscale filter on hover via tailwind arbitrary peer/group classes or just inline style overwrite if needed, but tailwind `grayscale` already works. Let's rely on tailwind. I will remove inline filter. */}
+                {/* Photo Top */}
+                <div className="w-24 h-24 sm:w-28 sm:h-28 mb-4 sm:mb-5 rounded-full overflow-hidden border-2 border-white/10 group-hover:border-[#0F9D58]/80 transition-colors duration-300 relative shrink-0">
+                    <img
+                        src={member.image}
+                        alt={member.name}
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3";
+                        }}
+                        className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-500"
+                    />
+                </div>
 
-                <div className="relative p-6 z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-[#0E1117] via-[#0E1117]/80 to-transparent w-full">
+                {/* Content Section */}
+                <div className="flex flex-col items-center justify-center text-center w-full flex-grow">
                     {member.type && member.type !== "Member" && !member.type.includes("CSE") && !member.type.includes("Other") && !member.type.includes("IT") && !member.type.includes("AI/ML") && (
                         <span className="text-[10px] font-mono text-[#B6F000] uppercase tracking-wider mb-2 block">
                             {member.type}
                         </span>
                     )}
-                    <h3 className="text-xl font-heading font-bold text-[#E6EDF3] leading-tight mb-1">
+                    <h3 className="text-[17px] sm:text-xl font-heading font-bold text-[#E6EDF3] leading-tight mb-2 truncate w-full group-hover:text-[#0F9D58] transition-colors duration-300">
                         {member.fullName || member.name}
                     </h3>
-                    <p className="text-[#8B949E]/70 text-xs font-mono mb-2">
+                    <p className="text-[#8B949E]/80 text-[11px] sm:text-[13px] font-mono tracking-wide px-2 leading-relaxed h-[36px] overflow-hidden line-clamp-2">
                         {displayRole}
                     </p>
+                </div>
 
-                    {/* Social Icons Slide Up */}
-                    <div className="flex gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 h-0 group-hover:h-auto overflow-hidden">
-                        {member.linkedin && <Linkedin className="w-5 h-5 text-white" />}
-                        {member.github && <Github className="w-5 h-5 text-white" />}
-                        {member.instagram && <Instagram className="w-5 h-5 text-white" />}
-                        {member.portfolio && <Globe className="w-5 h-5 text-white" />}
-                    </div>
+                <div className="mt-4 flex gap-3 sm:gap-4 opacity-50 group-hover:opacity-100 transition-opacity duration-300">
+                    {member.linkedin && <Linkedin className="w-4 h-4 text-white hover:text-[#0A66C2] transition-colors" />}
+                    {member.github && <Github className="w-4 h-4 text-white hover:text-[#B6F000] transition-colors" />}
+                    {member.instagram && <Instagram className="w-4 h-4 text-white hover:text-[#E1306C] transition-colors" />}
+                    {member.portfolio && <Globe className="w-4 h-4 text-white hover:text-[#0F9D58] transition-colors" />}
                 </div>
             </motion.div>
 
