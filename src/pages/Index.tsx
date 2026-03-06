@@ -9,13 +9,6 @@ import EventSection from "@/components/EventSection";
 import { Terminal, TrendingUp, TrendingDown, GitCommit, GitPullRequest, CheckCircle2, ChevronRight, Trophy, Github, Linkedin, Mail, Instagram, Globe } from "lucide-react";
 
 const Index = () => {
-  // 1. Leaderboard State
-  const [leaderboard, setLeaderboard] = useState([
-    { id: 1, name: "vineet_m", score: 2840, tag: "DSA", trend: "up" },
-    { id: 2, name: "sarah_c", score: 2790, tag: "CP", trend: "up" },
-    { id: 3, name: "alex_j", score: 2755, tag: "Hackathon", trend: "up" },
-  ]);
-
   const eventPhotos = [
     "/events/WhatsApp Image 2026-03-05 at 12.01.23 PM.jpeg",
     "/events/WhatsApp Image 2026-03-05 at 12.01.24 PM.jpeg",
@@ -26,21 +19,6 @@ const Index = () => {
     "/events/WhatsApp Image 2026-03-05 at 12.01.26 PM.jpeg",
     "/events/WhatsApp Image 2026-03-05 at 12.01.27 PM.jpeg",
   ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLeaderboard(prev => {
-        let newBoard = prev.map(p => ({
-          ...p,
-          score: p.score + Math.floor(Math.random() * 25),
-          trend: Math.random() > 0.3 ? "up" : "down"
-        }));
-        newBoard.sort((a, b) => b.score - a.score);
-        return newBoard.slice(0, 3);
-      });
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
 
   // 3. Terminal State
   const terminalStats = [
@@ -110,7 +88,7 @@ const Index = () => {
             </div>
 
             {/* Right: Content & Dashboards */}
-            <div className="order-1 lg:order-2 space-y-12">
+            <div className="order-1 lg:order-2 flex flex-col justify-center h-full pt-8 lg:pt-16">
               <div className="space-y-6">
                 <h2 className="text-4xl md:text-6xl font-sans font-extrabold text-[#E6EDF3] leading-[1.1]">
                   Computational <br />
@@ -126,8 +104,8 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Stacked Terminal & Leaderboard for Right Column */}
-              <div className="space-y-6 max-w-xl">
+              {/* Terminal for Right Column */}
+              <div className="space-y-6 max-w-xl mt-8">
                 {/* Terminal Interface */}
                 <div className="bg-[rgba(10,15,30,0.55)] backdrop-blur-[20px] rounded-[24px] border border-white/5 p-6 h-[220px] overflow-hidden flex flex-col shadow-2xl">
                   <div className="flex items-center justify-between mb-3 opacity-60">
@@ -144,37 +122,6 @@ const Index = () => {
                         <TerminalLine key={item.id} item={item} stats={terminalStats} />
                       ))}
                     </AnimatePresence>
-                  </div>
-                </div>
-
-                {/* Leaderboard Interface - Compact */}
-                <div className="bg-[rgba(10,15,30,0.55)] backdrop-blur-[20px] rounded-[24px] border border-white/5 p-6 shadow-2xl">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-sans font-bold text-white flex items-center gap-2">
-                      <Trophy className="w-4 h-4 text-[#7CFF4F]" />
-                      TOP_CONTRIBUTORS
-                    </h3>
-                  </div>
-
-                  <div className="space-y-3">
-                    {leaderboard.map((user, idx) => (
-                      <motion.div
-                        key={user.id}
-                        layout
-                        className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10 group transition-all"
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="text-xs font-bold text-[#8B949E] w-4">{idx + 1}</span>
-                          <div>
-                            <p className="text-xs font-bold text-white group-hover:text-[#7CFF4F] transition-colors">{user.name}</p>
-                            <p className="text-[9px] font-mono text-[#8B949E] uppercase opacity-60">{user.tag}</p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-xs font-mono font-bold text-[#E6EDF3]">{user.score} XP</p>
-                        </div>
-                      </motion.div>
-                    ))}
                   </div>
                 </div>
               </div>

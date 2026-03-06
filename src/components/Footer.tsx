@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="flex items-center space-x-3">
               <div className="flex items-center">
                 <img
-                  src="/gfg-kdkce.svg"
+                  src="/gfg_custom_logo.svg"
                   alt="GFG Logo"
                   className="h-10 lg:h-12 w-auto object-contain"
                 />

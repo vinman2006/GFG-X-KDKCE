@@ -64,7 +64,7 @@ const HeroSection = () => {
         {/* Left Column: Text Content */}
         <div className="flex flex-col gap-[22px] max-w-[540px]">
           <h1 className="hero-elem font-sans font-extrabold text-[#E6EDF3] text-[56px] lg:text-[64px] leading-[1.1] tracking-[-0.03em]">
-            <TypewriterText text="GDG X KDKCE" />
+            <TypewriterText text="GFG X KDKCE" />
           </h1>
 
           <h2 className="hero-elem font-sans text-transparent bg-clip-text bg-gradient-to-r from-[#0F9D58] to-[#B6F000] text-[18px] font-bold uppercase tracking-[8px] animate-pulse">
@@ -72,7 +72,7 @@ const HeroSection = () => {
           </h2>
 
           <p className="hero-elem font-sans text-lg text-[#8B949E] leading-relaxed border-l-2 border-[#0F9D58]/30 pl-6">
-            GDG X KDKCE is a student-driven developer community focused on learning, building, and sharing technology. We organize workshops, hackathons, and hands-on sessions to help students explore modern development and real-world problem solving.
+            GFG X KDKCE is a student-driven developer community focused on learning, building, and sharing technology. We organize workshops, hackathons, and hands-on sessions to help students explore modern development and real-world problem solving.
           </p>
 
           <div className="hero-elem mt-[15px]">

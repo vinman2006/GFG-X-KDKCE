@@ -33,24 +33,14 @@ const Navigation = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center gap-3 pl-6 group transition-all duration-300"
+            className="flex items-center group transition-all duration-300"
           >
-            <div className="flex items-center justify-center relative">
-              {/* Subtle hover glow behind logo icon */}
-              <div className="absolute inset-0 bg-[#0F9D58] blur-[15px] opacity-0 group-hover:opacity-30 transition-opacity duration-300 rounded-full" />
+            <div className="flex items-center gap-2">
               <img
-                src="/gfg-kdkce.svg"
-                alt="GFG Logo"
-                className="h-[34px] w-auto object-contain relative z-10 transition-transform duration-300 group-hover:scale-105 group-hover:brightness-110"
+                src="/gfg_custom_logo.svg"
+                alt="GFG x KDKCE"
+                className="h-12 w-auto object-contain transition-all duration-300 hover:scale-[1.02] hover:brightness-110"
               />
-            </div>
-            <div className="flex flex-col justify-center translate-y-[1px]">
-              <span className="text-[16px] font-sans font-semibold tracking-tight text-[#E6EDF3] uppercase leading-none group-hover:text-white transition-colors duration-300">
-                GEEKSFORGEEKS
-              </span>
-              <span className="text-[11px] font-sans font-medium text-[#0F9D58] opacity-70 uppercase tracking-[0.2em] leading-none mt-1 group-hover:opacity-100 transition-opacity duration-300">
-                KDKCE
-              </span>
             </div>
           </Link>
 

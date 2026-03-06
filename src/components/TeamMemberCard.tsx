@@ -25,14 +25,16 @@ export type TeamMember = {
     domain?: string[];
     responsibilities?: string;
     joinDate?: string;
+    team?: string;
 };
 
 type TeamMemberCardProps = {
     member: TeamMember;
     idx: number;
+    isLead?: boolean;
 };
 
-const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, idx }) => {
+const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, idx, isLead }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     // Lock body scroll when modal is open
@@ -58,9 +60,9 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, idx }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ rotateX: 5, rotateY: -5, scale: 1.02 }}
+                whileHover={{ rotateX: 5, rotateY: -5, scale: 1.02, y: -6 }}
                 onClick={() => setIsOpen(true)}
-                className="group relative bg-[#161B22]/50 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:border-[#0F9D58] hover:shadow-[0_0_30px_rgba(15,157,88,0.2)] h-[320px]"
+                className={`group relative bg-[#161B22]/50 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:border-[#0F9D58] hover:shadow-[0_10px_30px_rgba(15,157,88,0.3)] flex flex-col justify-end ${isLead ? "h-[380px] hover:shadow-[0_10px_40px_rgba(15,157,88,0.5)] md:w-[320px] w-full" : "h-[320px]"}`}
                 style={{ transformStyle: "preserve-3d" }}
             >
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0E1117] via-[#0E1117]/50 to-transparent z-10" />
@@ -74,14 +76,18 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, idx }) => {
                     className="absolute inset-0 w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-500 opacity-60 group-hover:opacity-100"
                 />
 
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-[#0E1117] via-[#0E1117]/80 to-transparent">
-                    <span className="text-[10px] font-mono text-[#B6F000] uppercase tracking-wider mb-2 block">
-                        {member.type}
-                    </span>
-                    <h3 className="text-xl font-heading font-bold text-[#E6EDF3]">
-                        {member.preferredName || member.name}
+                {/* CSS to remove inline grayscale filter on hover via tailwind arbitrary peer/group classes or just inline style overwrite if needed, but tailwind `grayscale` already works. Let's rely on tailwind. I will remove inline filter. */}
+
+                <div className="relative p-6 z-20 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 bg-gradient-to-t from-[#0E1117] via-[#0E1117]/80 to-transparent w-full">
+                    {member.type && member.type !== "Member" && !member.type.includes("CSE") && !member.type.includes("Other") && !member.type.includes("IT") && !member.type.includes("AI/ML") && (
+                        <span className="text-[10px] font-mono text-[#B6F000] uppercase tracking-wider mb-2 block">
+                            {member.type}
+                        </span>
+                    )}
+                    <h3 className="text-xl font-heading font-bold text-[#E6EDF3] leading-tight mb-1">
+                        {member.fullName || member.name}
                     </h3>
-                    <p className="text-[#8B949E] text-sm font-mono mb-2">
+                    <p className="text-[#8B949E]/70 text-xs font-mono mb-2">
                         {displayRole}
                     </p>
 
